@@ -1,0 +1,33 @@
+<h1>Listing discount_templates</h1>
+
+<table>
+  <tr>
+    <th>Value</th>
+    <th>Type</th>
+    <th>Starts at</th>
+    <th>Ends at</th>
+    <th>Minimum order amount</th>
+    <th>Usage limit</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @discount_templates.each do |discount_template| %>
+  <tr>
+    <td><%= discount_template.value %></td>
+    <td><%= discount_template.type %></td>
+    <td><%= discount_template.starts_at %></td>
+    <td><%= discount_template.ends_at %></td>
+    <td><%= discount_template.minimum_order_amount %></td>
+    <td><%= discount_template.usage_limit %></td>
+    <td><%= link_to 'Show', discount_template %></td>
+    <td><%= link_to 'Edit', edit_discount_template_path(discount_template) %></td>
+    <td><%= link_to 'Destroy', discount_template, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Discount template', new_discount_template_path %>

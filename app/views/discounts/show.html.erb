@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @discount.code %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @discount.value %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @discount.type %>
+</p>
+
+<p>
+  <b>Starts at:</b>
+  <%= @discount.starts_at %>
+</p>
+
+<p>
+  <b>Ends at:</b>
+  <%= @discount.ends_at %>
+</p>
+
+<p>
+  <b>Minimum order amount:</b>
+  <%= @discount.minimum_order_amount %>
+</p>
+
+<p>
+  <b>Usage limit:</b>
+  <%= @discount.usage_limit %>
+</p>
+
+
+<%= link_to 'Edit', edit_discount_path(@discount) %> |
+<%= link_to 'Back', discounts_path %>

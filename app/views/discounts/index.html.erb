@@ -1,0 +1,35 @@
+<h1>Listing discounts</h1>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Value</th>
+    <th>Type</th>
+    <th>Starts at</th>
+    <th>Ends at</th>
+    <th>Minimum order amount</th>
+    <th>Usage limit</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @discounts.each do |discount| %>
+  <tr>
+    <td><%= discount.code %></td>
+    <td><%= discount.value %></td>
+    <td><%= discount.type %></td>
+    <td><%= discount.starts_at %></td>
+    <td><%= discount.ends_at %></td>
+    <td><%= discount.minimum_order_amount %></td>
+    <td><%= discount.usage_limit %></td>
+    <td><%= link_to 'Show', discount %></td>
+    <td><%= link_to 'Edit', edit_discount_path(discount) %></td>
+    <td><%= link_to 'Destroy', discount, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Discount', new_discount_path %>
