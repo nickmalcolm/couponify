@@ -14,3 +14,9 @@ end
 Factory.define :discount do |d|
   d.association :customer, :factory => :fake_customer
 end
+
+Factory.define :discount_template do |dt|
+  dt.value rand(100.00)
+  dt.type "percentage"
+  dt.minimum_order_amount rand(100.00)
+end
