@@ -79,7 +79,7 @@ $(document).ready(
 <h2>Existing Templates</h2>
 
 <% @discount_templates.each do |discount_template| %>
-  <%= long_description(discount_template) %><br />
+  <%= sanitize(long_description(discount_template)) %><br />
 <% end %>
 <br />
 

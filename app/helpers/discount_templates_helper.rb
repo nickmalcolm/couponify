@@ -1,12 +1,13 @@
 module DiscountTemplatesHelper
   
   def long_description(dt)
-    d =  dt.value_str+", "
-    d += "Orders equal to or above $#{dt.minimum_order_amount.to_i}, " if dt.minimum_order_amount.to_i > 0
-    d += "Starts "+dt.starts_at.strftime("%b %d, ") unless dt.starts_at.nil?
-    d += "Ends "+dt.ends_at.strftime("%b %d, ") unless dt.ends_at.nil?
-    d += "Can be used #{pluralize(dt.usage_limit, "time")}" if dt.usage_limit.to_i > 0
-    d
+    d =  "Give <strong>#{dt.customer_criteria} customers</strong> who place <strong>"
+    d += ((dt.minimum_order_amount.to_i > 0) ? "orders over #{dt.minimum_order_amount}USD " : "any order ") 
+    d += "</strong>"
+    d += "between <strong>" + (dt.starts_at.nil? ? "now " : dt.starts_at.strftime("%d %b %y"))
+    d += "</strong> and <strong>" + (dt.ends_at.nil? ? "forever " : dt.ends_at.strftime("%d %b %y"))
+    d += "</strong> a discount of <strong>#{dt.value_str}</strong> "
+    d += "to be used on <strong>at most #{dt.usage_limit} #{pluralize(dt.usage_limit, "order")}</strong>"
   end
   
 end
