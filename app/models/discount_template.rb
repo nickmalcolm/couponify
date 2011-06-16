@@ -12,7 +12,9 @@ class DiscountTemplate < ActiveRecord::Base
   
   validate :percentage_lte_100
   
-  attr_accessible :value, :discount_type, :starts_at, :ends_at, :minimum_order_amount, :usage_limit, :customer_criteria
+  attr_accessible :value, :discount_type, :starts_at, :ends_at, 
+                  :minimum_order_amount, :usage_limit, :customer_criteria,
+                  :order_placed_before, :order_placed_after
   
   def value_str
     if discount_type.eql? "fixed_amount"

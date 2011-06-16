@@ -39,7 +39,13 @@
   </select> 
 
   to be used on at most <a id="usage">one</a>
-  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" style="display:none" size="3"> orders.
+  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" style="display:none" size="3"> orders and
+  
+  is valid between <a id="order_after">now</a>
+  <input id="discount_template_order_placed_after" name="discount_template[order_placed_after]" type="text" style="display:none">
+
+  and <a id="order_before">forever</a>
+  <input id="discount_template_order_placed_before" name="discount_template[order_placed_before]" type="text" style="display:none">
   
   <input id="discount_template_submit" name="commit" type="submit" value="Create Template">
 <% end %>

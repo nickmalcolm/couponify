@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616104440) do
+ActiveRecord::Schema.define(:version => 20110616125704) do
 
   create_table "customers", :force => true do |t|
     t.string   "email"
@@ -27,13 +27,15 @@ ActiveRecord::Schema.define(:version => 20110616104440) do
   create_table "discount_templates", :force => true do |t|
     t.float    "value"
     t.string   "discount_type"
-    t.datetime "starts_at"
-    t.datetime "ends_at"
+    t.datetime "order_placed_after"
+    t.datetime "order_placed_before"
     t.float    "minimum_order_amount"
     t.integer  "usage_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "customer_criteria"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
   end
 
   create_table "discounts", :force => true do |t|
