@@ -1,6 +1,6 @@
 $(document).ready(
   function(){
-    toglify("#all", "#discount_template_customer_criteria");
+    toglify("#all", "#define_customers");
     toglify("#no_limit", "#limit");
     toglify("#usage", "#discount_template_use_limit");
     
