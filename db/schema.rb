@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616071700) do
+ActiveRecord::Schema.define(:version => 20110616080246) do
 
   create_table "customers", :force => true do |t|
     t.string   "email"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20110616071700) do
     t.datetime "updated_at"
     t.integer  "customer_id"
     t.integer  "discount_template_id"
+    t.boolean  "used"
   end
 
   create_table "orders", :force => true do |t|
