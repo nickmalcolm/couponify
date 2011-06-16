@@ -23,8 +23,7 @@
   </select>
   customers 
 
-  who place <a id="no_limit">any order</a>
-  <span id="limit" style="display:none">
+  who place <a id="no_limit">any order</a><span id="limit" style="display:none">
     orders of <input id="discount_template_minimum_order_amount" name="discount_template[minimum_order_amount]" size="7" type="text">USD or more</span>,
 
 
@@ -45,49 +44,6 @@
   <input id="discount_template_submit" name="commit" type="submit" value="Create Template">
 <% end %>
 
-<script type="text/javascript">
-$(document).ready(
-  function(){
-    toglify("#all", "#discount_customer_criteria");
-    toglify("#no_limit", "#limit");
-    toglify("#usage", "#discount_use_limit");
-    
-    function toglify(link,input){
-      $(link).click(function(){
-        $(link).toggle();
-        $(input).toggle();
-      });
-    }
-    
-    $("#discount_starts_at").datepicker({ 
-      minDate: 0,
-      onSelect: function(date) {
-                  $("#starts_at").html(date)
-      },
-      dateFormat: 'd M yy'
-    });
-    
-    
-    $("#starts_at").click(function(){
-      $("#discount_starts_at").datepicker('show');
-    });
-    
-    $("#discount_ends_at").datepicker({ 
-      minDate: 0,
-      onSelect: function(date) {
-                  $("#ends_at").html(date)
-      },
-      dateFormat: 'd M yy'
-    });
-    
-    $("#ends_at").click(function(){
-      $("#discount_ends_at").datepicker('show');
-    });
-    
-  }
-);
-</script>
-
 <h2>Existing Templates</h2>
 
 <% @discount_templates.each do |discount_template| %>
@@ -95,4 +51,4 @@ $(document).ready(
 <% end %>
 <br />
 
-<%= link_to 'New Discount template', new_discount_template_path %>
+<%= javascript_include_tag "discount_template_form" %>
