@@ -22,7 +22,8 @@
   <div id="container" class="clearfix">
     <ul id="tabs">
       <%= tab :index, {:controller => 'home'}, :label => 'Home' %>
-      <%= tab :design, {:controller => 'home', :action => 'design'}, :label => 'Design Help' %>
+      <%= tab :index, {:controller => 'discounts'}, :label => 'Discounts' %>
+      <%= tab :index, {:controller => 'discount_templates'}, :label => 'Templates' %>
     </ul>
     
     <!-- Flash error & notice-->
