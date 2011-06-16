@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616080246) do
+ActiveRecord::Schema.define(:version => 20110616104440) do
 
   create_table "customers", :force => true do |t|
     t.string   "email"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20110616080246) do
     t.integer  "usage_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "customer_criteria"
   end
 
   create_table "discounts", :force => true do |t|
