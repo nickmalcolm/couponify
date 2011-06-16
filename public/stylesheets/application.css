@@ -71,7 +71,7 @@ h3 { margin-top: 24px; }
 #tabs a:link#current, #tabs a:visited#current, #tabs a:hover { color: #000 !important; }
 #tabs a:link#current, #tabs a:visited#current { font-weight: bold; background: #fff; }
 
-a { color: #22658b; }
+a { color: #22658b; text-decoration: underline; }
 a:hover { color: #359cd7; }
 
 dl { margin: 10px 15px; }

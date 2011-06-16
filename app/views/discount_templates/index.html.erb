@@ -1,10 +1,80 @@
 <h1>Discount Templates</h1>
 
 <h2>New Template</h2>
-Give <a>new customers</a> who place <a>any order</a> between <a>now</a> and <a>forever</a> a discount of <input id="discount_value" name="discount[value]" size="7" type="text"><select id="discount_type" name="type">
-              <option value="fixed_amount">USD</option>
-              <option value="percentage">%</option>
-            </select> to be used on <a>one</a> order.
+
+<form>
+  Give <a id="all">all</a>
+  <select id="discount_customer_criteria" name="discount[customer_criteria]" style="display: none;">
+    <option value="all">all</option>
+    <option value="new">new</option>
+    <option value="repeat">repeat</option>
+  </select>
+  customers 
+
+  who place <a id="no_limit">any order</a>
+  <span id="limit" style="display:none">
+    orders of <input id="discount_minimum_order_amount" name="discount[minimum_order_amount]" size="7" type="text">USD or more</span>,
+
+
+  between <a id="starts_at">now</a>
+  <input id="discount_starts_at" name="discount[starts_at]" type="text" style="display:none">
+
+  and <a id="ends_at">forever</a>,
+  <input id="discount_ends_at" name="discount[ends_at]" type="text" style="display:none">
+
+  a discount of <input id="discount_value" name="discount[value]" size="7" type="text"><select id="discount_type" name="discount[discount_type]">
+    <option value="fixed_amount">USD</option>
+    <option value="percentage">%</option>
+  </select> 
+
+  to be used on at most <a id="usage">one</a>
+  <input id="discount_use_limit" name="discount[usage_limit]" type="text" style="display:none" size="3"> orders.
+  
+  <input id="discount_template_submit" name="commit" type="submit" value="Create Template">
+</form>
+
+<script type="text/javascript">
+$(document).ready(
+  function(){
+    toglify("#all", "#discount_customer_criteria");
+    toglify("#no_limit", "#limit");
+    toglify("#usage", "#discount_use_limit");
+    
+    function toglify(link,input){
+      $(link).click(function(){
+        $(link).toggle();
+        $(input).toggle();
+      });
+    }
+    
+    $("#discount_starts_at").datepicker({ 
+      minDate: 0,
+      onSelect: function(date) {
+                  $("#starts_at").html(date)
+      },
+      dateFormat: 'd M yy'
+    });
+    
+    
+    $("#starts_at").click(function(){
+      $("#discount_starts_at").datepicker('show');
+    });
+    
+    $("#discount_ends_at").datepicker({ 
+      minDate: 0,
+      onSelect: function(date) {
+                  $("#ends_at").html(date)
+      },
+      dateFormat: 'd M yy'
+    });
+    
+    $("#ends_at").click(function(){
+      $("#discount_ends_at").datepicker('show');
+    });
+    
+  }
+);
+</script>
 
 <h2>Existing Templates</h2>
 
