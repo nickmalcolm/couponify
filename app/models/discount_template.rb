@@ -13,6 +13,13 @@ class DiscountTemplate < ActiveRecord::Base
   
   attr_accessible :value, :discount_type, :starts_at, :ends_at, :minimum_order_amount, :usage_limit
   
+  def value_str
+    if discount_type.eql? "fixed_amount"
+      "$#{value.to_f}"
+    else
+      "#{value.to_f}%"
+    end
+  end
   
   private
     def percentage_lte_100
