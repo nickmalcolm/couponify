@@ -1,34 +1,19 @@
 class DiscountTemplatesController < ApplicationController
-  # GET /discount_templates
-  # GET /discount_templates.xml
+  
   def index
+    @template = DiscountTemplate.new
     @discount_templates = DiscountTemplate.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @discount_templates }
+      format.html
     end
   end
 
-  # GET /discount_templates/1
-  # GET /discount_templates/1.xml
   def show
     @discount_template = DiscountTemplate.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @discount_template }
-    end
-  end
-
-  # GET /discount_templates/new
-  # GET /discount_templates/new.xml
-  def new
-    @discount_template = DiscountTemplate.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @discount_template }
+      format.html
     end
   end
 
