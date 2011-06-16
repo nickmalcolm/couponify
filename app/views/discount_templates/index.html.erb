@@ -46,9 +46,32 @@
 
 <h2>Existing Templates</h2>
 
-<% @discount_templates.each do |discount_template| %>
-  <%= sanitize(long_description(discount_template)) %><br />
-<% end %>
-<br />
+<table>
+  <tbody>
+    <tr>
+      <th>
+        Codes Created
+      </th>
+      <th>
+        Codes Used
+      </th>
+      <th>
+        Net Sales
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+    <% @discount_templates.each do |discount_template| %>
+    <tr>
+      <% @a = rand(10); @b = rand(@a).ceil; @c = @b*rand(19.99) %>
+      <td style="width:15%;text-align:center;"><%= content_tag :h2, @a %></td>
+      <td style="width:15%;text-align:center;"><%= @b %></td>
+      <td style="width:15%;text-align:center;"><%= number_to_currency @c %></td>
+      <td style="color:#777;"><%= sanitize(long_description(discount_template)) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= javascript_include_tag "discount_template_form" %>
