@@ -21,19 +21,22 @@ class DiscountTemplatesController < ApplicationController
   def edit
     @discount_template = DiscountTemplate.find(params[:id])
   end
-
+  
+  def new
+    @template = DiscountTemplate.new
+  end
+  
   # POST /discount_templates
   # POST /discount_templates.xml
   def create
-    @discount_template = DiscountTemplate.new(params[:discount_template])
+    @template = DiscountTemplate.new(params[:discount_template])
 
     respond_to do |format|
-      if @discount_template.save
-        format.html { redirect_to(@discount_template, :notice => 'Discount template was successfully created.') }
-        format.xml  { render :xml => @discount_template, :status => :created, :location => @discount_template }
+      if @template.save
+        format.html { redirect_to(discount_templates_path, :notice => 'Discount template was successfully created.') }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @discount_template.errors, :status => :unprocessable_entity }
+        @discount_templates = DiscountTemplate.all
+        format.html { render :action => "index", :error => 'Oops! Please fix the missing or incorrect details' }
       end
     end
   end
