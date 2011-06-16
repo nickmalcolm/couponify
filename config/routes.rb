@@ -1,13 +1,8 @@
 Couponify::Application.routes.draw do
+  
   resources :discount_templates
 
-  resources :orders
-
-  resources :customers
-
-  resources :discounts
-
-  resources :shops
+  resources :discounts, :only => [:index, :show]
 
   root :to                   => 'home#index'
 

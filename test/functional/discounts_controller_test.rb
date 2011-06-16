@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DiscountsControllerTest < ActionController::TestCase
   setup do
-    @discount = nil
+    @discount = Factory(:discount)
   end
 
   test "should get index" do
@@ -11,17 +11,16 @@ class DiscountsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:discounts)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
+  test "shouldn't get new" do
+    assert_raises ActionController::RoutingError do
+      get :new
+    end
   end
 
-  test "should create discount" do
-    assert_difference('Discount.count') do
-      post :create, :discount => @discount.attributes
+  test "shouldn't create discount" do
+    assert_raises ActionController::RoutingError do
+      post :create, :discount => {:customer => Factory(:fake_customer)}
     end
-
-    assert_redirected_to discount_path(assigns(:discount))
   end
 
   test "should show discount" do
@@ -29,21 +28,21 @@ class DiscountsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => @discount.to_param
-    assert_response :success
+  test "shouldn't get edit" do
+    assert_raises ActionController::RoutingError do
+      get :edit, :id => @discount.to_param
+    end
   end
 
-  test "should update discount" do
-    put :update, :id => @discount.to_param, :discount => @discount.attributes
-    assert_redirected_to discount_path(assigns(:discount))
+  test "shouldn't update discount" do
+    assert_raises ActionController::RoutingError do
+      put :update, :id => @discount.to_param, :discount => @discount.attributes
+    end
   end
 
-  test "should destroy discount" do
-    assert_difference('Discount.count', -1) do
+  test "shouldn't destroy discount" do
+    assert_raises ActionController::RoutingError do
       delete :destroy, :id => @discount.to_param
     end
-
-    assert_redirected_to discounts_path
   end
 end

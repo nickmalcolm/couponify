@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DiscountTemplatesControllerTest < ActionController::TestCase
   setup do
-    @discount_template = discount_templates(:one)
+    @discount_template = Factory(:discount_template)
   end
 
   test "should get index" do

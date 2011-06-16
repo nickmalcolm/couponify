@@ -24,12 +24,6 @@
     <td><%= discount.minimum_order_amount %></td>
     <td><%= discount.usage_limit %></td>
     <td><%= link_to 'Show', discount %></td>
-    <td><%= link_to 'Edit', edit_discount_path(discount) %></td>
-    <td><%= link_to 'Destroy', discount, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Discount', new_discount_path %>
