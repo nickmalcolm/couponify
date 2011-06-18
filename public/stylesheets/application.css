@@ -290,3 +290,20 @@ h1.blue, h2.blue, h3.blue {
   font-size: 90%;
   line-height: 190%;
 }
+.odd{
+  background-color: #ddd;
+}
+.discount_template:hover{
+  background-color: #eee;
+  cursor: pointer;
+}
+.discription{
+  color: #777;
+}
+.discount_template .description a{
+  text-decoration: none;
+}
+.discount_template .description a:hover{
+  text-decoration: none;
+  background-color: none;
+}

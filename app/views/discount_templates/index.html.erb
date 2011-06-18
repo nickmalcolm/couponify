@@ -76,16 +76,25 @@
         Description
       </th>
     </tr>
-    <% @discount_templates.each do |discount_template| %>
-    <tr>
+    <% @discount_templates.each_with_index do |discount_template, i| %>
+    <%= content_tag_for :tr, discount_template, :class=>(i.odd? ? "odd" : ""), "data-url"=>discount_template_path(discount_template) do%>
       <% @a = rand(10).ceil; @b = rand(@a).floor; @c = @b*rand(9.99); @d = @c+(@b*rand(9.99)) %>
       <td style="width:15%;text-align:center;"><%= content_tag :h2, @b %><br /> used, <%= @a-@b %> left</td>
       <td style="width:15%;text-align:center;"><%= number_to_currency @c %></td>
       <td style="width:15%;text-align:center;"><%= number_to_currency @d %></td>
-      <td style="color:#777;"><%= sanitize(long_description(discount_template)) %></td>
-    </tr>
+      <td class="description"><%= link_to sanitize(long_description(discount_template)), discount_template_path(discount_template) %></td>
+    <% end %>
     <% end %>
   </tbody>
 </table>
 
 <%= javascript_include_tag "discount_template_form" %>
+<script>
+$(document).ready(
+  function(){
+    $(".discount_template").click(function(){
+      location.href = $(this).attr("data-url");
+    });
+  });
+</script>
+  
