@@ -1,7 +1,7 @@
 class DiscountTemplatesController < ApplicationController
   
   def index
-    @template = DiscountTemplate.new
+    @discount_template = DiscountTemplate.new
     @discount_templates = DiscountTemplate.all
 
     respond_to do |format|

@@ -1,41 +1,57 @@
-<%= form_for(@template) do |f| %>
-  <% if @template.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@template.errors.count, "error") %> prohibited this discount_template from being saved:</h2>
+<% if @discount_template.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@discount_template.errors.count, "error") %> prohibited this discount_template from being saved:</h2>
 
-      <ul>
-      <% @template.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <ul>
+    <% @discount_template.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :value %><br />
-    <%= f.text_field :value %>
-  </div>
-  <div class="field">
-    <%= f.label :discount_type %><br />
-    <%= f.text_field :discount_type %>
-  </div>
-  <div class="field">
-    <%= f.label :starts_at %><br />
-    <%= f.datetime_select :starts_at %>
-  </div>
-  <div class="field">
-    <%= f.label :ends_at %><br />
-    <%= f.datetime_select :ends_at %>
-  </div>
-  <div class="field">
-    <%= f.label :minimum_order_amount %><br />
-    <%= f.text_field :minimum_order_amount %>
-  </div>
-  <div class="field">
-    <%= f.label :usage_limit %><br />
-    <%= f.text_field :usage_limit %>
-  </div>
+<%= form_for @discount_template do |f| %>
+  Give <a id="all">repeat customers</a>
+  <span id="define_customers" style="display:none">
+    <select id="discount_template_customer_criteria" name="discount_template[customer_criteria]">
+      <option value="all">all</option>
+      <option value="new">new</option>
+      <option value="repeat" selected>repeat</option>
+    </select>
+    customers 
+
+    who place <a id="no_limit">any order</a><span id="limit" style="display:none">
+      orders worth <input id="discount_template_minimum_order_amount" name="discount_template[minimum_order_amount]" size="7" type="text">USD or more</span>
+
+
+    between <a id="starts_at">now</a>
+    <input id="discount_template_starts_at" name="discount_template[starts_at]" type="text" style="display:none">
+
+    and <a id="ends_at">forever</a>,
+    <input id="discount_template_ends_at" name="discount_template[ends_at]" type="text" style="display:none">
+  </span>
+
+  a discount of <input id="discount_template_value" name="discount_template[value]" size="7" type="text"><select id="discount_template_discount_type" name="discount_template[discount_type]">
+    <option value="fixed_amount">USD</option>
+    <option value="percentage">%</option>
+  </select> 
+
+  to be used on at most <a id="usage">one</a>
+  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" style="display:none" size="3"> order
+  
+  placed <a id="anytime">anytime</a>
+  <span id="valid_time" style="display:none">
+    between <a id="order_after">now</a>
+    <input id="discount_template_order_placed_after" name="discount_template[order_placed_after]" type="text" style="display:none">
+
+    and <a id="order_before">forever</a>
+    <input id="discount_template_order_placed_before" name="discount_template[order_placed_before]" type="text" style="display:none">
+  
+  </span>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= javascript_include_tag "discount_template_form" %>

@@ -1,35 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Value:</b>
-  <%= @discount_template.value %>
-</p>
-
-<p>
-  <b>Type:</b>
-  <%= @discount_template.discount_type %>
-</p>
-
-<p>
-  <b>Starts at:</b>
-  <%= @discount_template.starts_at %>
-</p>
-
-<p>
-  <b>Ends at:</b>
-  <%= @discount_template.ends_at %>
-</p>
-
-<p>
-  <b>Minimum order amount:</b>
-  <%= @discount_template.minimum_order_amount %>
-</p>
-
-<p>
-  <b>Usage limit:</b>
-  <%= @discount_template.usage_limit %>
-</p>
-
+<%= render 'form' %>
 
 <%= link_to 'Edit', edit_discount_template_path(@discount_template) %> |
 <%= link_to 'Back', discount_templates_path %>
