@@ -1,14 +1,15 @@
 $(document).ready(
   function(){
-    toglify("#all", "#define_customers");
-    toglify("#no_limit", "#limit");
-    toglify("#usage", "#discount_template_use_limit");
-    toglify("#anytime", "#valid_time");
+    hider("#all", "#define_customers");
+    hider("#no_limit", "#limit");
+    hider("#usage", "#discount_template_use_limit");
+    hider("#usage", "#s");
+    hider("#anytime", "#valid_time");
     
-    function toglify(link,input){
+    function hider(link,input){
       $(link).click(function(){
-        $(link).toggle();
-        $(input).toggle();
+        $(link).hide();
+        $(input).show();
       });
     }
     
