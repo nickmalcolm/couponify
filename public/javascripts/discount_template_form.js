@@ -3,6 +3,7 @@ $(document).ready(
     toglify("#all", "#define_customers");
     toglify("#no_limit", "#limit");
     toglify("#usage", "#discount_template_use_limit");
+    toglify("#anytime", "#valid_time");
     
     function toglify(link,input){
       $(link).click(function(){

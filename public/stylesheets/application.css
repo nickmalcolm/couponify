@@ -283,3 +283,10 @@ h1.blue, h2.blue, h3.blue {
   color: #fff;
   padding: 10px;
 }
+
+.help_text{
+  color: #888;
+  font-style: italic;
+  font-size: 90%;
+  line-height: 190%;
+}

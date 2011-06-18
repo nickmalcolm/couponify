@@ -1,6 +1,8 @@
 <h1>Discount Templates</h1>
 
-<h2>New Template</h2>
+<p class="help_text">Discount templates let you target specific customers and offer them discounts. When someone places an order which matches one of your templates, they'll be sent a discount code. For more information on how this works, check out the <a>Help</a> page.</p>
+
+<h2>Make a New Template</h2>
 
 <% if @template.errors.any? %>
   <div id="error_explanation">
@@ -15,17 +17,17 @@
 <% end %>
 
 <%= form_for @template do |f| %>
-  Give <a id="all">all customers</a>
+  Give <a id="all">repeat customers</a>
   <span id="define_customers" style="display:none">
     <select id="discount_template_customer_criteria" name="discount_template[customer_criteria]">
       <option value="all">all</option>
       <option value="new">new</option>
-      <option value="repeat">repeat</option>
+      <option value="repeat" selected>repeat</option>
     </select>
     customers 
 
     who place <a id="no_limit">any order</a><span id="limit" style="display:none">
-      orders of <input id="discount_template_minimum_order_amount" name="discount_template[minimum_order_amount]" size="7" type="text">USD or more</span>,
+      orders worth <input id="discount_template_minimum_order_amount" name="discount_template[minimum_order_amount]" size="7" type="text">USD or more</span>
 
 
     between <a id="starts_at">now</a>
@@ -41,13 +43,17 @@
   </select> 
 
   to be used on at most <a id="usage">one</a>
-  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" style="display:none" size="3"> orders and
+  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" style="display:none" size="3"> order
   
-  is valid between <a id="order_after">now</a>
-  <input id="discount_template_order_placed_after" name="discount_template[order_placed_after]" type="text" style="display:none">
+  placed <a id="anytime">anytime</a>
+  <span id="valid_time" style="display:none">
+    between <a id="order_after">now</a>
+    <input id="discount_template_order_placed_after" name="discount_template[order_placed_after]" type="text" style="display:none">
 
-  and <a id="order_before">forever</a>
-  <input id="discount_template_order_placed_before" name="discount_template[order_placed_before]" type="text" style="display:none">
+    and <a id="order_before">forever</a>
+    <input id="discount_template_order_placed_before" name="discount_template[order_placed_before]" type="text" style="display:none">
+  
+  </span>
   
   <input id="discount_template_submit" name="commit" type="submit" value="Create Template">
 <% end %>
@@ -58,10 +64,10 @@
   <tbody>
     <tr>
       <th>
-        Codes Created
+        Codes
       </th>
       <th>
-        Codes Used
+        Discounts
       </th>
       <th>
         Net Sales
@@ -72,10 +78,10 @@
     </tr>
     <% @discount_templates.each do |discount_template| %>
     <tr>
-      <% @a = rand(10); @b = rand(@a).ceil; @c = @b*rand(19.99) %>
-      <td style="width:15%;text-align:center;"><%= content_tag :h2, @a %></td>
-      <td style="width:15%;text-align:center;"><%= @b %></td>
+      <% @a = rand(10).ceil; @b = rand(@a).floor; @c = @b*rand(9.99); @d = @c+(@b*rand(9.99)) %>
+      <td style="width:15%;text-align:center;"><%= content_tag :h2, @b %><br /> used, <%= @a-@b %> left</td>
       <td style="width:15%;text-align:center;"><%= number_to_currency @c %></td>
+      <td style="width:15%;text-align:center;"><%= number_to_currency @d %></td>
       <td style="color:#777;"><%= sanitize(long_description(discount_template)) %></td>
     </tr>
     <% end %>
