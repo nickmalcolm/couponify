@@ -12,11 +12,11 @@
 
 <%= form_for @discount_template do |f| %>
   Between <a id="starts_at">now</a>
-  <input id="discount_template_starts_at" name="discount_template[starts_at]" type="text" style="display:none">
+  <input id="discount_template_starts_at" name="discount_template[starts_at]" type="text" class="hide_me">
 
   and <a id="ends_at">forever</a>,
-  <input id="discount_template_ends_at" name="discount_template[ends_at]" type="text" style="display:none"> send <a id="all">repeat customers</a>
-  <span id="define_customers" style="display:none">
+  <input id="discount_template_ends_at" name="discount_template[ends_at]" type="text" class="hide_me"> send <a id="all">repeat customers</a>
+  <span id="define_customers" class="hide_me">
     <select id="discount_template_customer_criteria" name="discount_template[customer_criteria]">
       <option value="all">all</option>
       <option value="new">new</option>
@@ -24,7 +24,7 @@
     </select>
     customers 
 
-    who place <a id="no_limit">any order</a><span id="limit" style="display:none">
+    who place <a id="no_limit">any order</a><span id="limit" class="hide_me">
       orders worth <input id="discount_template_minimum_order_amount" name="discount_template[minimum_order_amount]" size="7" type="text">USD or more</span>
 
 
@@ -36,14 +36,19 @@
     <option value="percentage">%</option> 
   </select> discount code. This code can be used 
   
-  <a id="anytime">anytime</a><span id="valid_time" style="display:none">
+  <a id="anytime">anytime</a>
+  <span id="valid_time" class="hide_me">
     between <a id="order_after">now</a>
-    <input id="discount_template_order_placed_after" name="discount_template[order_placed_after]" type="text" style="display:none">
+    
+    <input id="discount_template_order_placed_before" name="discount_template[order_placed_before]" type="text" class="hide_me">
+    <input id="discount_template_order_placed_after" name="discount_template[order_placed_after]" type="text" class="hide_me">
 
-    and <a id="order_before">forever</a><input id="discount_template_order_placed_before" name="discount_template[order_placed_before]" type="text" style="display:none"></span>
+    and <a id="order_before">forever</a>
+    
+  </span>
   
   on <a id="usage">one</a>
-  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" style="display:none" size="3"> order<span id="s" style="display:none">s</span>.
+  <input id="discount_template_use_limit" name="discount_template[usage_limit]" type="text" class="hide_me" size="3"> order<span id="s" class="hide_me">s</span>.
   
   <div class="actions">
     <%= f.submit %>

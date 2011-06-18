@@ -29,10 +29,10 @@ class DiscountTemplatesController < ApplicationController
   # POST /discount_templates
   # POST /discount_templates.xml
   def create
-    @template = DiscountTemplate.new(params[:discount_template])
+    @discount_template = DiscountTemplate.new(params[:discount_template])
 
     respond_to do |format|
-      if @template.save
+      if @discount_template.save
         format.html { redirect_to(discount_templates_path, :notice => 'Discount template was successfully created.') }
       else
         @discount_templates = DiscountTemplate.all

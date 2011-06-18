@@ -1,10 +1,5 @@
 $(document).ready(
   function(){
-    hider("#all", "#define_customers");
-    hider("#no_limit", "#limit");
-    hider("#usage", "#discount_template_use_limit");
-    hider("#usage", "#s");
-    hider("#anytime", "#valid_time");
     
     function hider(link,input){
       $(link).click(function(){
@@ -13,54 +8,37 @@ $(document).ready(
       });
     }
     
-    $("#discount_template_starts_at").datepicker({ 
-      minDate: 0,
-      onSelect: function(date) {
-                  $("#starts_at").html(date)
-      },
-      dateFormat: 'd M yy'
-    });
+    //When the link is click, show
+    // a jquery-ui calendar for the
+    // given input
+    function calenderfy(link, input){
+      $(input).datepicker({ 
+        minDate: 0,
+        onSelect: function(date) {
+                    $(link).html(date)
+        },
+        dateFormat: 'd M yy'
+      });
+
+
+      $(link).click(function(){
+        $(input).datepicker('show');
+      });
+    }
     
     
-    $("#starts_at").click(function(){
-      $("#discount_template_starts_at").datepicker('show');
-    });
+    hider("#all", "#define_customers");
+    hider("#no_limit", "#limit");
+    hider("#usage", "#discount_template_use_limit");
+    hider("#usage", "#s");
+    hider("#anytime", "#valid_time");
     
-    $("#discount_template_ends_at").datepicker({ 
-      minDate: 0,
-      onSelect: function(date) {
-                  $("#ends_at").html(date)
-      },
-      dateFormat: 'd M yy'
-    });
+    calenderfy("#starts_at", "#discount_template_starts_at");
+    calenderfy("#ends_at", "#discount_template_ends_at");
+    calenderfy("#order_before", "#discount_template_order_placed_before");
+    calenderfy("#order_after", "#discount_template_order_placed_after");
     
-    $("#ends_at").click(function(){
-      $("#discount_template_ends_at").datepicker('show');
-    });
-    
-    $("#discount_template_order_placed_before").datepicker({ 
-      minDate: 0,
-      onSelect: function(date) {
-                  $("#order_before").html(date)
-      },
-      dateFormat: 'd M yy'
-    });
-    
-    $("#order_before").click(function(){
-      $("#discount_template_order_placed_before").datepicker('show');
-    });
-    
-    $("#discount_template_order_placed_after").datepicker({ 
-      minDate: 0,
-      onSelect: function(date) {
-                  $("#order_after").html(date)
-      },
-      dateFormat: 'd M yy'
-    });
-    
-    $("#order_after").click(function(){
-      $("#discount_template_order_placed_after").datepicker('show');
-    });
+    $(".hide_me").hide();
     
   }
 );
