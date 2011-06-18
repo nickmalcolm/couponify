@@ -307,3 +307,7 @@ h1.blue, h2.blue, h3.blue {
   text-decoration: none;
   background-color: none;
 }
+.discount_template h2{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
