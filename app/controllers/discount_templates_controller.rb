@@ -1,7 +1,7 @@
 class DiscountTemplatesController < ApplicationController
   
   def index
-    @discount_template = DiscountTemplate.new
+    @discount_template = DiscountTemplate.new(:starts_at => DateTime.now, :order_placed_after => DateTime.now)
     @discount_templates = DiscountTemplate.all
 
     respond_to do |format|
