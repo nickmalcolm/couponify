@@ -23,7 +23,7 @@ class DiscountTemplatesController < ApplicationController
   end
   
   def new
-    @template = DiscountTemplate.new
+    @discount_template = DiscountTemplate.new
   end
   
   # POST /discount_templates
