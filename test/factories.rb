@@ -19,5 +19,4 @@ Factory.define :discount_template do |dt|
   dt.value rand(100.00)
   dt.customer_criteria "repeat"
   dt.discount_type "percentage"
-  dt.minimum_order_amount rand(100.00)
 end

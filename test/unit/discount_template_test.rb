@@ -3,25 +3,26 @@ require 'test_helper'
 class DiscountTemplateTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   
-  test "need value type and minimum amount" do
+  test "need value type criteria and minimum amount" do
     d = DiscountTemplate.new(
       :value => 0.00, 
-      :discount_type=>"percentage", 
-      :minimum_order_amount => 0.00)
+      :discount_type=>"percentage",
+      :customer_criteria => "repeat")
       
     assert d.valid?
     assert d.save!
     assert_equal 0.00, d.value
     assert_equal "percentage", d.discount_type
-    assert_equal 0.00, d.minimum_order_amount
+    assert_equal "repeat", d.customer_criteria
   end
   
-  test "10% for order of > $10.50 one use" do
+  test "10% for first order, when > $10.50, one use" do
     d = DiscountTemplate.new(
       :value => 10, 
       :discount_type=>"percentage", 
       :minimum_order_amount => 10.50,
-      :usage_limit => 1
+      :usage_limit => 1,
+      :customer_criteria => "new"
       )
       
     assert d.valid?
@@ -30,20 +31,22 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     assert_equal "percentage", d.discount_type
     assert_equal 10.50, d.minimum_order_amount
     assert_equal 1, d.usage_limit
+    assert_equal "new", d.customer_criteria
   end
   
   test "$5.50 for any order 10 uses" do
     d = DiscountTemplate.new(
       :value => 5.50, 
       :discount_type=>"fixed_amount", 
-      :usage_limit => 10
+      :usage_limit => 10,
+      :customer_criteria => "new"
       )
       
-    #assert d.valid?
+    assert d.valid?
     assert d.save!
     assert_equal 5.50, d.value
     assert_equal "fixed_amount", d.discount_type
-    assert_nil d.minimum_order_amount
+    assert_equal "new", d.customer_criteria
     assert_equal 10, d.usage_limit
   end
   
@@ -69,6 +72,23 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     d = Factory(:discount_template, :discount_type=>"percentage")
     assert !d.update_attributes(:value => 101)
     assert d.invalid?
+  end
+  
+  test "can't have dates before now" do
+    assert Factory(:discount_template, :starts_at => 1.day.ago).invalid?
+    assert Factory(:discount_template, :ends_at => 1.day.ago).invalid?
+    assert Factory(:discount_template, :order_placed_after => 1.day.ago).invalid?
+    assert Factory(:discount_template, :order_placed_before => 1.day.ago).invalid?
+  end
+  
+  test "can't have coupon ends at equal or before starts" do
+    assert Factory(:discount_template, :starts_at => 1.day.from_now, :ends_at => 1.day.from_now).invalid?
+    assert Factory(:discount_template, :starts_at => 1.day.from_now, :ends_at => DateTime.now).invalid?
+  end
+  
+  test "can't have orders_before before or equal to orders_after" do
+    assert Factory(:discount_template, :order_placed_before => 1.day.from_now, :order_placed_after => 1.day.from_now).invalid?
+    assert Factory(:discount_template, :order_placed_before => DateTime.now, :order_placed_after => 1.day.from_now).invalid?
   end
   
 end
