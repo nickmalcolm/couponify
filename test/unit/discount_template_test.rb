@@ -4,6 +4,7 @@ class DiscountTemplateTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   
   test "need value type criteria and minimum amount" do
+    
     d = DiscountTemplate.new(
       :value => 0.00, 
       :discount_type=>"percentage",
@@ -75,20 +76,22 @@ class DiscountTemplateTest < ActiveSupport::TestCase
   end
   
   test "can't have dates before now" do
-    assert Factory(:discount_template, :starts_at => 1.day.ago).invalid?
-    assert Factory(:discount_template, :ends_at => 1.day.ago).invalid?
-    assert Factory(:discount_template, :order_placed_after => 1.day.ago).invalid?
-    assert Factory(:discount_template, :order_placed_before => 1.day.ago).invalid?
+    assert Factory.build(:discount_template, :starts_at => 1.day.ago).invalid?
+    assert Factory.build(:discount_template, :ends_at => 1.day.ago).invalid?
+    assert Factory.build(:discount_template, :order_placed_after => 1.day.ago).invalid?
+    assert Factory.build(:discount_template, :order_placed_before => 1.day.ago).invalid?
   end
   
   test "can't have coupon ends at equal or before starts" do
-    assert Factory(:discount_template, :starts_at => 1.day.from_now, :ends_at => 1.day.from_now).invalid?
-    assert Factory(:discount_template, :starts_at => 1.day.from_now, :ends_at => DateTime.now).invalid?
+    odfn = 1.day.from_now
+    assert Factory.build(:discount_template, :starts_at => odfn, :ends_at => odfn).invalid?
+    assert Factory.build(:discount_template, :starts_at => odfn, :ends_at => DateTime.now).invalid?
   end
   
   test "can't have orders_before before or equal to orders_after" do
-    assert Factory(:discount_template, :order_placed_before => 1.day.from_now, :order_placed_after => 1.day.from_now).invalid?
-    assert Factory(:discount_template, :order_placed_before => DateTime.now, :order_placed_after => 1.day.from_now).invalid?
+    odfn = 1.day.from_now
+    assert Factory.build(:discount_template, :order_placed_before => odfn, :order_placed_after => odfn).invalid?
+    assert Factory.build(:discount_template, :order_placed_before => DateTime.now, :order_placed_after => odfn).invalid?
   end
   
 end
