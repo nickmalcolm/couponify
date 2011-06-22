@@ -12,7 +12,11 @@
   <p>Graph</p>
 <section>
 
-<section id="existing_templates">
+<div id="existing_templates_toggle" style="text-align:center">
+  <h2>Show existing templates</h2>
+</div>
+
+<section id="existing_templates" style="display:none">
   <h2>Existing Templates</h2>
 
   <table>
@@ -43,13 +47,11 @@
     </tbody>
   </table>
 
-  <script>
-  $(document).ready(
-    function(){
-      $(".discount_template").click(function(){
-        location.href = $(this).attr("data-url");
-      });
-    });
-  </script>
-  
 </section>
+
+<% content_for(:jquery) do %>
+  $(".discount_template").click(function(){
+    location.href = $(this).attr("data-url");
+  });
+  hider("#existing_templates_toggle","#existing_templates");
+<% end %>
