@@ -5,6 +5,12 @@ function hider(link,input){
   });
 }
 
+function slider(link,input){
+  $(link).click(function(){
+    $(input).slideToggle();  
+  });
+}
+
 //When the link is click, show
 // a jquery-ui calendar for the
 // given input
