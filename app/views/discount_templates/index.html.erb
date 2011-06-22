@@ -2,46 +2,54 @@
 
 <p class="help_text">Discount templates let you target specific customers and offer them discounts. When someone places an order which matches one of your templates, they'll be sent a discount code. For more information on how this works, check out the <a>Help</a> page.</p>
 
-<h2>Make a New Template</h2>
+<section id="new_template">
+  <h2>Make a New Template</h2>
 
-<%= render 'sentence_form' %>
+  <%= render 'sentence_form' %>
+</section>
 
-<h2>Existing Templates</h2>
+<section id="graph">
+  <p>Graph</p>
+<section>
 
-<table>
-  <tbody>
-    <tr>
-      <th>
-        Codes
-      </th>
-      <th>
-        Discounts
-      </th>
-      <th>
-        Net Sales
-      </th>
-      <th>
-        Description
-      </th>
-    </tr>
-    <% @discount_templates.each_with_index do |discount_template, i| %>
-    <%= content_tag_for :tr, discount_template, :class=>(i.odd? ? "odd" : ""), "data-url"=>discount_template_path(discount_template) do%>
-      <% @a = rand(10).ceil; @b = rand(@a).floor; @c = @b*rand(9.99); @d = @c+(@b*rand(9.99)) %>
-      <td style="width:15%;text-align:center;"><%= content_tag :h2, @b %><p>used, <%= @a-@b %> left</p></td>
-      <td style="width:15%;text-align:center;"><%= number_to_currency @c %></td>
-      <td style="width:15%;text-align:center;"><%= number_to_currency @d %></td>
-      <td class="description"><%= link_to sanitize(long_description(discount_template)), discount_template_path(discount_template) %></td>
-    <% end %>
-    <% end %>
-  </tbody>
-</table>
+<section id="existing_templates">
+  <h2>Existing Templates</h2>
 
-<script>
-$(document).ready(
-  function(){
-    $(".discount_template").click(function(){
-      location.href = $(this).attr("data-url");
+  <table>
+    <tbody>
+      <tr>
+        <th>
+          Codes
+        </th>
+        <th>
+          Discounts
+        </th>
+        <th>
+          Net Sales
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+      <% @discount_templates.each_with_index do |discount_template, i| %>
+      <%= content_tag_for :tr, discount_template, :class=>(i.odd? ? "odd" : ""), "data-url"=>discount_template_path(discount_template) do%>
+        <% @a = rand(10).ceil; @b = rand(@a).floor; @c = @b*rand(9.99); @d = @c+(@b*rand(9.99)) %>
+        <td style="width:15%;text-align:center;"><%= content_tag :h2, @b %><p>used, <%= @a-@b %> left</p></td>
+        <td style="width:15%;text-align:center;"><%= number_to_currency @c %></td>
+        <td style="width:15%;text-align:center;"><%= number_to_currency @d %></td>
+        <td class="description"><%= link_to sanitize(long_description(discount_template)), discount_template_path(discount_template) %></td>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <script>
+  $(document).ready(
+    function(){
+      $(".discount_template").click(function(){
+        location.href = $(this).attr("data-url");
+      });
     });
-  });
-</script>
+  </script>
   
+</section>
