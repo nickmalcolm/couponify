@@ -54,32 +54,3 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
-
-
-.help_text{
-  color: #888;
-  font-style: italic;
-  font-size: 90%;
-  line-height: 190%;
-}
-.odd{
-  background-color: #ddd;
-}
-.discount_template:hover{
-  background-color: #eee;
-  cursor: pointer;
-}
-.discription{
-  color: #777;
-}
-.discount_template .description a{
-  text-decoration: none;
-}
-.discount_template .description a:hover{
-  text-decoration: none;
-  background-color: none;
-}
-.discount_template h2{
-  margin-bottom: 0px;
-  padding-bottom: 0px;
-}
