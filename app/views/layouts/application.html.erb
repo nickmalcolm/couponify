@@ -36,22 +36,19 @@
     </div>
   </div>
   
-  <div class="container12">
+  <div class="content container12">
+    <!-- Flash error & notice-->
+    <% if flash[:error] %> <div id="flasherrors"><%= flash[:error] %></div><% end %>
+    <% if flash[:notice] %><div id="flashnotices"><%= flash[:notice] %></div><% end %>
 
-    <div id="container" class="clearfix">
-      
-    
-      <!-- Flash error & notice-->
-      <% if flash[:error] %> <div id="flasherrors"><%= flash[:error] %></div><% end %>
-      <% if flash[:notice] %><div id="flashnotices"><%= flash[:notice] %></div><% end %>
-  
-      <!-- begin div.main-->
-      <div id="main" class="grid12">
-        <%= yield %>
-      </div>
-      <!-- end div.main -->
+    <!-- begin div.main-->
+    <div id="main" class="grid12">
+      <%= yield %>
     </div>
+    <!-- end div.main -->
   </div>
+  
+  <div class="clear"></div>
   
   <script>
   $(document).ready(
