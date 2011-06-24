@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="500"
+   height="500"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="dollar_coupon.svg"
+   style="display:inline">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3049">
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         offset="0"
+         id="stop3051" />
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         offset="1"
+         id="stop3053" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3049"
+       id="linearGradient3129"
+       gradientTransform="scale(0.99997341,1.0000266)"
+       x1="2.1637255"
+       y1="7.6017308"
+       x2="486.39064"
+       y2="7.6017308"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="134.91835"
+     inkscape:cy="247.85714"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     inkscape:window-width="1069"
+     inkscape:window-height="653"
+     inkscape:window-x="64"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Background"
+     style="display:none">
+    <rect
+       style="fill:#000000;stroke:#dde768;stroke-opacity:1"
+       id="rect3106"
+       width="627.14288"
+       height="561.42859"
+       x="-61.42857"
+       y="-28.571428" />
+  </g>
+  <filter
+     id="i1"
+     width="1.5"
+     height="1.5"
+     color-interpolation-filters="sRGB">
+    <feOffset
+       result="offOut"
+       in="SourceAlpha"
+       dx="10"
+       dy="10"
+       id="feOffset3028" />
+    <feGaussianBlur
+       result="blurOut"
+       in="offOut"
+       stdDeviation="5"
+       id="feGaussianBlur3030" />
+    <feColorMatrix
+       result="matrixOut"
+       in="offOut"
+       type="matrix"
+       values="1 1 1 1 1 1 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0"
+       id="feColorMatrix3032" />
+    <feBlend
+       in="SourceGraphic"
+       in2="blurOut"
+       mode="normal"
+       id="feBlend3034" />
+  </filter>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Coupon"
+     style="display:inline;filter:url(#i1)">
+    <path
+       style="fill:url(#linearGradient3129)"
+       d="M 334.03125 7.59375 C 325.00298 15.716422 311.64429 16.014568 303.46875 8.09375 L 5.28125 306.28125 C 13.492531 314.75658 12.891494 328.82726 3.875 337.84375 C 3.323506 338.39524 2.742912 338.91778 2.15625 339.40625 L 29.65625 366.90625 C 30.146755 366.38543 30.615671 365.85309 31.125 365.34375 C 58.74683 337.72193 103.53443 337.72193 131.15625 365.34375 C 158.77808 392.96558 158.77808 437.75318 131.15625 465.375 C 130.647 465.88426 130.14566 466.3845 129.625 466.875 L 154.59375 491.84375 C 155.08214 491.257 155.60476 490.6765 156.15625 490.125 C 165.25521 481.02605 179.45723 480.48847 187.90625 488.9375 C 188.22344 489.25468 188.52062 489.60459 188.8125 489.9375 L 485.4375 193.3125 C 485.10524 193.0211 484.78536 192.6916 484.46875 192.375 C 476.01972 183.92598 476.5573 169.72396 485.65625 160.625 C 485.89238 160.38888 486.13225 160.16213 486.375 159.9375 L 461.40625 134.96875 C 433.77411 162.46133 389.0787 162.42246 361.5 134.84375 C 333.92131 107.26505 333.8824 62.569625 361.375 34.9375 L 334.03125 7.59375 z M 226.96875 129.375 C 234.33262 129.14321 240.95334 131.5364 246.8125 136.5625 C 259.30997 146.87045 263.6398 158.13862 259.8125 170.34375 C 259.05178 173.7184 256.98631 176.3245 253.625 178.15625 C 251.30342 180.5017 248.96238 181.29744 246.625 180.53125 C 244.54561 179.50489 242.34001 178.34723 240 177.0625 C 237.39946 175.52023 234.55139 174.47173 231.4375 173.96875 C 228.58164 173.2056 225.21838 174.2848 221.34375 177.15625 C 212.30485 184.20269 206.4074 194.58822 203.625 208.34375 C 200.61367 228.06412 206.92732 248.76909 222.59375 270.46875 C 226.77362 276.6703 231.47588 282.37224 236.6875 287.53125 C 248.93491 299.65525 263.72666 305.27214 281.09375 304.40625 C 300.79554 303.78796 320.43971 292.27207 340.03125 269.875 C 344.92707 263.88697 348.91523 255.20498 351.96875 243.78125 C 353.74808 236.77193 355.00494 230.01707 355.75 223.53125 C 356.49488 217.04575 356.34976 210.68613 355.28125 204.46875 C 355.00744 201.61828 356.41205 200.96033 359.53125 202.5 C 365.76675 205.06134 371.50174 209.42899 376.71875 215.625 C 380.63263 220.53157 382.5805 224.28247 382.59375 226.875 C 382.70397 248.65374 376.72516 268.02338 364.625 284.9375 C 362.0506 288.5805 359.06945 292.34398 355.71875 296.25 C 352.62582 299.89561 349.1505 303.68509 345.28125 307.59375 C 323.35497 329.74334 300.35515 344.64032 276.28125 352.28125 C 244.95305 360.9961 217.952 354.12967 195.28125 331.6875 C 190.85142 327.30231 186.81237 322.5108 183.15625 317.34375 C 160.18042 285.8286 150.18202 253.4836 153.125 220.28125 C 156.08922 191.22753 166.32624 168.60173 183.875 152.4375 C 200.32791 137.44594 214.69563 129.76132 226.96875 129.375 z "
+       id="rect3000" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Text $"
+     style="display:none">
+    <g
+       transform="matrix(0.70351527,-0.71068015,0.71068015,0.70351527,0,0)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       id="text3826">
+      <path
+         d="m 111.77339,419.42785 c 0.73314,-8.06662 -0.18353,-15.21661 -2.75,-21.45 -1.10019,-3.29993 -2.56686,-3.84993 -4.4,-1.65 -3.66685,5.13339 -8.066848,9.71672 -13.2,13.75 -5.133505,4.03338 -10.816832,7.88338 -17.05,11.55 -10.266816,5.8667 -19.25014,9.1667 -26.95,9.9 -29.700103,1.83336 -51.7000807,-4.0333 -66,-17.6 -12.833387,-11.73328 -19.250047,-26.21659 -19.25,-43.45 -4.7e-5,-7.33324 0.733285,-14.66656 2.2,-22 4.399946,-26.39986 14.666603,-45.46651 30.8000002,-57.2 11.7332413,-7.69982 23.2832298,-10.81649 34.6499998,-9.35 4.766547,0.73351 7.883211,2.38351 9.35,4.95 1.833207,2.56684 3.116539,5.31683 3.85,8.25 0.733205,2.56683 1.466537,4.95016 2.2,7.15 1.099869,2.20016 3.299867,3.30015 6.6,3.3 3.666526,1.10015 6.966523,0.73349 9.9,-1.1 11.366509,-5.86651 16.316504,-16.86649 14.85,-33 -1.466827,-20.53312 -19.983475,-31.71645 -55.55,-33.55 -23.8334155,-1.09978 -47.116726,7.51688 -69.85,25.85 -25.666677,21.26684 -41.616661,51.15014 -47.85,89.65 -1.099987,6.23343 -1.649987,12.46676 -1.65,18.7 1.3e-5,31.90006 14.116666,55.9167 42.35,72.05 22.366615,11.73334 49.1332552,17.6 80.3,17.6 5.499885,0 10.633213,-0.18334 15.4,-0.55 5.133204,-0.36667 9.899865,-0.91667 14.3,-1.65 20.533174,-3.3 38.499823,-12.64999 53.9,-28.05 1.83314,-1.8333 3.11647,-5.86663 3.85,-12.1"
+         style="font-size:550px;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Marketing Script;-inkscape-font-specification:Marketing Script Bold"
+         id="path3127"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+  <g
+     style="display:none"
+     inkscape:label="Text $ copy"
+     id="g3120"
+     inkscape:groupmode="layer" />
+</svg>
