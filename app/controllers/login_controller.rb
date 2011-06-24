@@ -49,6 +49,6 @@ class LoginController < ApplicationController
   protected
   
   def return_address
-    session[:return_to] || root_url
+    session[:return_to] || discount_templates_url
   end
 end
