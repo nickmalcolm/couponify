@@ -13,17 +13,21 @@
       <div class="grid12">
         <%= image_tag "c_coupon.svg", :class=>"logo" %><h1> <%= link_to 'couponify', root_url %></h1>
         <ul id="tabs">
-          <%# if current_shop %>
-          <li>
-            <%= link_to "Shopify", "https://bob.com", :class => 'shop_name' %>
-          </li>
-          <li>
-            <%= link_to 'Templates', discount_templates_url %>
-          </li>
-          <li>
-            <%= link_to 'Stats', discount_templates_url %>
-          </li>
-          <%# end %>
+          <% if current_shop %>
+            <li>
+              <%= link_to "Shopify", "https://#{current_shop.url}/admin", :class => 'shop_name' %>
+            </li>
+            <li>
+              <%= link_to 'Templates', discount_templates_path %>
+            </li>
+            <li>
+              <%= link_to 'Stats', discount_templates_path %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Log In', login_path %>
+            </li>
+          <% end %>
           <li>
             <%= link_to "Help", root_url %>
           </li>
