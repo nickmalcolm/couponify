@@ -8,24 +8,32 @@
 </head>
 
 <body>
-  <div class="container12">
-    <div id="header" class="grid12">
-      <h1><%= link_to 'Shopify Demo Application', '/' %></h1>
-    
-      <p id="login-link">
-        <% if current_shop %>
-            <span class="note">current shop</span> <%= link_to current_shop.url, "https://#{current_shop.url}", :class => 'shop_name' %> <span class="note">|</span>
-            <%= link_to 'logout', :controller => "login", :action => 'logout' %>
-        <% end %>
-      </p>
+  <div id="header">
+    <div class="container12">
+      <div class="grid12">
+        <%= image_tag "dollar_coupon.svg", :class=>"logo" %><h1> <%= link_to 'couponify', root_url %></h1>
+  
+        <p id="login-link">
+          <% if current_shop %>
+              <span class="note">current shop</span> <%= link_to current_shop.url, "https://#{current_shop.url}", :class => 'shop_name' %> <span class="note">|</span>
+              <%= link_to 'logout', :controller => "login", :action => 'logout' %>
+          <% end %>
+        </p>
+        <ul id="tabs" class="grid12">
+          <% if current_shop %>
+            <%= link_to "Go to Shopify", "https://#{current_shop.url}", :class => 'shop_name' %>
+            <%= link_to 'My Templates', discount_templates_url %>
+          <% end %>
+          <%= link_to "Help", root_url %>
+        </ul>
+      </div>
     </div>
+  </div>
+  
+  <div class="container12">
 
     <div id="container" class="clearfix">
-      <ul id="tabs" class="grid12">
-        <%= tab :index, {:controller => 'home'}, :label => 'Home' %>
-        <%= tab :index, {:controller => 'discounts'}, :label => 'Discounts' %>
-        <%= tab :index, {:controller => 'discount_templates'}, :label => 'Templates' %>
-      </ul>
+      
     
       <!-- Flash error & notice-->
       <% if flash[:error] %> <div id="flasherrors"><%= flash[:error] %></div><% end %>
