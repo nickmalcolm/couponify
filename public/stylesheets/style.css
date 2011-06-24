@@ -2,15 +2,15 @@ body {
   background-color: #fff; 
   font-family: 'Lucida Grande', 'Lucida Sans Unicode',sans-serif; 
   font-size: 14px; 
-  color: #222;
+  line-height: 20px;
+  color: #444;
   -webkit-text-size-adjust: none; 
   margin: 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family:'Lucida Grande', 'Lucida Sans Unicode'; 
-  font-weight:normal;
-  color:#222;
+  font-family: helvetica,arial,sans-serif;
+  font-weight:bold;
 }
 h1{ 
   font-weight: 800;
@@ -18,7 +18,7 @@ h1{
 }
 h2{
   font-size:30px;
-  margin: 0 0 25px;
+  line-height: 40px;
 }
 h3{
   font-size:16px;
