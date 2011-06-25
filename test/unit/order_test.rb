@@ -46,6 +46,8 @@ class OrderMatchingTest < ActiveSupport::TestCase
     :customer_criteria => "all", :discount_type => "percentage"))
   end
   
+  
+  
   test "order matches template with date range" do
     assert @order.matches?(Factory(:discount_template, :value => 0, 
     :customer_criteria => "all", :discount_type => "percentage", 
@@ -60,6 +62,20 @@ class OrderMatchingTest < ActiveSupport::TestCase
     assert !@order.matches?(Factory(:discount_template, :value => 0, 
     :customer_criteria => "all", :discount_type => "percentage", 
     :order_placed_after => DateTime.now, :order_placed_before => 2.hours.from_now))
+  end
+  
+  
+  
+  test "order matches minimum amount of $1" do
+    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage",
+    :minimum_order_amount => 1))
+  end
+  
+  test "order does match minimum amount of $7.01" do
+    assert !@order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage",
+    :minimum_order_amount => 7.01))
   end
 
 end
