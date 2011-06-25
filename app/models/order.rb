@@ -17,7 +17,7 @@ class Order < ActiveRecord::Base
     (dt.order_placed_after  < created_at) &&
     (dt.order_placed_before.nil? ? true : (dt.order_placed_before > created_at) ) &&
     (dt.minimum_order_amount.nil? ? true : (dt.minimum_order_amount < total_price) ) &&
-    (dt.customer_criteria.eql? "all")
+    (customer.matches? dt)
   end
                                                         
 end                                                     

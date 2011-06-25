@@ -77,5 +77,27 @@ class OrderMatchingTest < ActiveSupport::TestCase
     :customer_criteria => "all", :discount_type => "percentage",
     :minimum_order_amount => 7.01))
   end
+  
+  test "order matches with all customer criteria" do
+    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage"))
+  end
+  
+  test "order matches with new customer criteria" do
+    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "new", :discount_type => "percentage"))
+  end
+  
+  test "order doesn't match with repeat customer criteria" do
+    assert !@order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "repeat", :discount_type => "percentage"))
+  end
+
+  test "order doesn match with repeat customer criteria when we increase order count" do
+    @order.customer.update_attributes(:orders_count => 2)
+    
+    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "repeat", :discount_type => "percentage"))
+  end
 
 end
