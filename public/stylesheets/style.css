@@ -176,11 +176,14 @@ ul#tabs li a:hover {
   text-decoration: none;
 }
 
-.logo{
-  width:45px;
-  height:45px;
+#header h1 a.logo{
+  padding: 0px;
+}
+
+.logo img{
+  width:210px;
+  height:55px;
   float:left;
-  margin: 5px 5px 0 0;
 }
 
 .yellow_bg{
