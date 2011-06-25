@@ -14,7 +14,9 @@ class Order < ActiveRecord::Base
                   :buyer_accepts_marketing, :shopify_customer_id
                   
   def matches?(dt)
-    dt.customer_criteria.eql? "all"
+    (dt.order_placed_after  < created_at) &&
+    (dt.order_placed_before.nil? ? true : (dt.order_placed_before > created_at) ) &&
+    (dt.customer_criteria.eql? "all")
   end
                                                         
 end                                                     

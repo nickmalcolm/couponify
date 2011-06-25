@@ -35,6 +35,8 @@ class OrderMatchingTest < ActiveSupport::TestCase
   
   def setup
     @order = Factory(:order)
+    @order.created_at = 1.day.from_now
+    @order.save!
     @customer = Factory(:customer, :shopify_id => @order.shopify_customer_id, :orders_count => 1)
   end
   
@@ -42,6 +44,22 @@ class OrderMatchingTest < ActiveSupport::TestCase
     #0% discount for all customers
     assert @order.matches?(Factory(:discount_template, :value => 0, 
     :customer_criteria => "all", :discount_type => "percentage"))
+  end
+  
+  test "order matches template with date range" do
+    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage", 
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now))
+  end
+  
+  test "order doesn't match template outside date range" do
+    assert !@order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage", 
+    :order_placed_after => 2.days.from_now, :order_placed_before => 4.days.from_now))
+    
+    assert !@order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage", 
+    :order_placed_after => DateTime.now, :order_placed_before => 2.hours.from_now))
   end
 
 end
