@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
                   :buyer_accepts_marketing, :shopify_customer_id
                   
   def matches?(dt)
-    false
+    dt.customer_criteria.eql? "all"
   end
                                                         
 end                                                     

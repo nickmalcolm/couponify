@@ -35,10 +35,13 @@ class OrderMatchingTest < ActiveSupport::TestCase
   
   def setup
     @order = Factory(:order)
-    @customer = Factory(:customer, :shopify_id => @order.shopify_customer_id)
+    @customer = Factory(:customer, :shopify_id => @order.shopify_customer_id, :orders_count => 1)
   end
   
-  test "order doesn't match empty template" do
-    assert !@order.matches?(Factory(:discount_template))
+  test "order matches empty template" do
+    #0% discount for all customers
+    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :customer_criteria => "all", :discount_type => "percentage"))
   end
+
 end
