@@ -11,7 +11,7 @@
   <div id="header">
     <div class="container12">
       <div class="grid12">
-        <h1> <%= link_to (image_tag "banner.png"), root_url, :class=> "logo" %></h1>
+        <h1> <%= link_to (image_tag "banner.png", :alt=>"couponify"), root_url, :class=> "logo", :name=>"couponify" %></h1>
         <ul id="tabs">
           <% if current_shop %>
             <li>
