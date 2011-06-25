@@ -12,5 +12,9 @@ class Order < ActiveRecord::Base
   
   attr_accessible :email, :total_price, :shopify_id, :total_line_items_price, :subtotal_price,
                   :buyer_accepts_marketing, :shopify_customer_id
+                  
+  def matches?(dt)
+    false
+  end
                                                         
 end                                                     

@@ -31,3 +31,14 @@ class OrderTest < ActiveSupport::TestCase
   end
   
 end
+class OrderMatchingTest < ActiveSupport::TestCase
+  
+  def setup
+    @order = Factory(:order)
+    @customer = Factory(:customer, :shopify_id => @order.shopify_customer_id)
+  end
+  
+  test "order doesn't match empty template" do
+    assert !@order.matches?(Factory(:discount_template))
+  end
+end
