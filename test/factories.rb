@@ -29,5 +29,5 @@ Factory.define :order do |o|
   o.total_line_items_price 7.00
   o.subtotal_price 7.00
   o.buyer_accepts_marketing true
-  o.customer_id 1234
+  o.shopify_customer_id 1234
 end

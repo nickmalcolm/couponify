@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616125704) do
+ActiveRecord::Schema.define(:version => 20110625124050) do
 
   create_table "customers", :force => true do |t|
     t.string   "email"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20110616125704) do
     t.float    "total_line_items_price"
     t.float    "subtotal_price"
     t.boolean  "buyer_accepts_marketing"
-    t.integer  "customer_id"
+    t.integer  "shopify_customer_id"
     t.string   "discount_code"
     t.datetime "created_at"
     t.datetime "updated_at"
