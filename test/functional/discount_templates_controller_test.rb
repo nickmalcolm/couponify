@@ -57,9 +57,9 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
   tests DiscountTemplatesController
   
   setup do
-    shop = Factory(:shop)
-    login_as(shop)
-    @discount_template = Factory(:discount_template, :shop => shop)
+    @shop = Factory(:shop)
+    login_as(@shop)
+    @discount_template = Factory(:discount_template, :shop => @shop)
   end
 
   test "should get index" do
@@ -67,6 +67,12 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
     assert_select "#discount_template_#{@discount_template.id}"
     assert_response :success
     assert_not_nil assigns(:discount_templates)
+  end
+  
+  test "index shouldn't show other shop's discounts" do
+    d = Factory(:discount)
+    get :index
+    assert !(assigns(:discount_templates).include? d)
   end
 
   test "should get new" do
@@ -78,7 +84,8 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
     assert_difference('DiscountTemplate.count') do
       post :create, :discount_template => @discount_template.attributes
     end
-
+    
+    assert DiscountTemplate.last.shop = @shop
     assert_redirected_to discount_templates_path
     assert_not_nil flash[:notice]
   end
