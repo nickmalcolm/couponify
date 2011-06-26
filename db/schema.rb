@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110626082535) do
+ActiveRecord::Schema.define(:version => 20110626234345) do
 
   create_table "customers", :force => true do |t|
     t.string   "email"
@@ -19,18 +19,18 @@ ActiveRecord::Schema.define(:version => 20110626082535) do
     t.integer  "shopify_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.float    "total_spent"
+    t.decimal  "total_spent",       :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "shop_id"
   end
 
   create_table "discount_templates", :force => true do |t|
-    t.float    "value"
+    t.decimal  "value",                :precision => 16, :scale => 2
     t.string   "discount_type"
     t.datetime "order_placed_after"
     t.datetime "order_placed_before"
-    t.float    "minimum_order_amount"
+    t.decimal  "minimum_order_amount", :precision => 16, :scale => 2
     t.integer  "usage_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -59,11 +59,11 @@ ActiveRecord::Schema.define(:version => 20110626082535) do
   create_table "orders", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.float    "total_price"
-    t.float    "total_discounts"
+    t.decimal  "total_price",             :precision => 16, :scale => 2
+    t.decimal  "total_discounts",         :precision => 16, :scale => 2
     t.integer  "shopify_id"
-    t.float    "total_line_items_price"
-    t.float    "subtotal_price"
+    t.decimal  "total_line_items_price",  :precision => 16, :scale => 2
+    t.decimal  "subtotal_price",          :precision => 16, :scale => 2
     t.boolean  "buyer_accepts_marketing"
     t.integer  "shopify_customer_id"
     t.string   "discount_code"
