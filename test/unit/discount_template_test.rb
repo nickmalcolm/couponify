@@ -1,14 +1,22 @@
 require 'test_helper'
 
 class DiscountTemplateTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   
-  test "need value type criteria and minimum amount" do
+  def setup
+    @shop = Factory(:shop)
+  end
+  
+  test "blank discount invalid" do
+    assert DiscountTemplate.new.invalid?
+  end
+  
+  test "need value, type, criteria, and shop" do
     
     d = DiscountTemplate.new(
       :value => 0.00, 
       :discount_type=>"percentage",
-      :customer_criteria => "repeat")
+      :customer_criteria => "repeat",
+      :shop => @shop)
       
     assert d.valid?
     assert d.save!
@@ -23,7 +31,8 @@ class DiscountTemplateTest < ActiveSupport::TestCase
       :discount_type=>"percentage", 
       :minimum_order_amount => 10.50,
       :usage_limit => 1,
-      :customer_criteria => "new"
+      :customer_criteria => "new",
+      :shop => @shop
       )
       
     assert d.valid?
@@ -40,7 +49,8 @@ class DiscountTemplateTest < ActiveSupport::TestCase
       :value => 5.50, 
       :discount_type=>"fixed_amount", 
       :usage_limit => 10,
-      :customer_criteria => "new"
+      :customer_criteria => "new",
+      :shop => @shop
       )
       
     assert d.valid?

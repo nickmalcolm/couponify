@@ -121,7 +121,7 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
                 :ends_at =>"",
                 :discount_type =>"fixed_amount", 
                 :minimum_order_amount =>"", 
-                :value =>"" }
+                :value =>""}
     login_as(Factory(:shop))
   end
   

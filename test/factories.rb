@@ -1,5 +1,7 @@
 Factory.define :customer do |c|
   c.email { Faker::Internet.email }
+  c.association :shop, :factory => :shop
+  c.shopify_id "123abc"
 end
 
 Factory.define :fake_customer, :parent => :customer do |c|
@@ -13,12 +15,14 @@ end
 
 Factory.define :discount do |d|
   d.association :customer, :factory => :fake_customer
+  d.association :shop, :factory => :shop
 end
 
 Factory.define :discount_template do |dt|
   dt.value rand(100.00)
   dt.customer_criteria "repeat"
   dt.discount_type "percentage"
+  dt.association :shop, :factory => :shop
 end
 
 Factory.define :order do |o|
@@ -30,6 +34,7 @@ Factory.define :order do |o|
   o.subtotal_price 7.00
   o.buyer_accepts_marketing true
   o.shopify_customer_id 1234
+  o.association :shop, :factory => :shop
 end
 
 Factory.define :shop do |s|

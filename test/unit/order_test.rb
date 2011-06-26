@@ -3,12 +3,16 @@ require 'test_helper'
 class OrderTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   
+  def setup
+    @shop = Factory(:shop)
+  end
+  
   test "can create order with necessary values" do
     assert Order.new(:email => "bob@example.com",
                   :total_price => 7.00, :total_discounts => 0,
                   :shopify_id => 1234, :total_line_items_price => 7.00,
                   :subtotal_price => 7.00, :buyer_accepts_marketing => true,
-                  :shopify_customer_id => 1234).valid?
+                  :shopify_customer_id => 1234, :shop => @shop).valid?
   end
   
   test "can create order with necessary + discount values" do
@@ -16,7 +20,7 @@ class OrderTest < ActiveSupport::TestCase
                   :total_price => 4.5, :total_discounts => 2.50,
                   :shopify_id => 1234, :total_line_items_price => 7.00,
                   :subtotal_price => 7.00, :buyer_accepts_marketing => true,
-                  :shopify_customer_id => 1234, :discount_code => "123ABC").valid?
+                  :shopify_customer_id => 1234, :discount_code => "123ABC", :shop => @shop).valid?
   end
   
   test "can't have blank order" do

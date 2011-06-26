@@ -1,10 +1,15 @@
 require 'test_helper'
 
 class CustomerTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test "blank customer is invalid" do
+    assert Customer.new.invalid?
   end
+  
+  test "customer needs an email, shopify_id and shop" do
+    assert Customer.create!(:email => "bob@example.com", :shopify_id => "1234", :shop => Factory(:shop)).valid?
+  end
+  
 end
 class CustomerMatchingTest < ActiveSupport::TestCase
   

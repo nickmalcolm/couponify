@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def current_shop
+    Shop.find_by_domain(session[:shopify].url) unless session[:shopify].nil?
+  end
+  
 end

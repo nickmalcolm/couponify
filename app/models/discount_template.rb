@@ -1,8 +1,10 @@
 class DiscountTemplate < ActiveRecord::Base
   
+  belongs_to :shop
   has_many :discounts
   has_many :customers, :through => :discounts
   
+  validates :shop, :presence => true
   validates :value, :numericality => {:greater_than_or_equal_to => 0}, :allow_nil => false
   validates :discount_type, :inclusion => {:in => ["fixed_amount", "percentage"]}, :allow_nil => false
   validates :customer_criteria, :inclusion => {:in => ["all", "new", "repeat"]}, :allow_nil => false
@@ -18,7 +20,7 @@ class DiscountTemplate < ActiveRecord::Base
   
   attr_accessible :value, :discount_type, :starts_at, :ends_at, 
                   :minimum_order_amount, :usage_limit, :customer_criteria,
-                  :order_placed_before, :order_placed_after
+                  :order_placed_before, :order_placed_after, :shop_id, :shop
   
   def value_str
     if discount_type.eql? "fixed_amount"

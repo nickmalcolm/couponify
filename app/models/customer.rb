@@ -1,8 +1,12 @@
 class Customer < ActiveRecord::Base
   
-  validates :email, :presence => true
+  belongs_to :shop
   
-  attr_accessible :orders_count
+  validates :shop, :presence => true
+  validates :email, :presence => true
+  validates :shopify_id, :presence => true
+  
+  attr_accessible :orders_count, :shop, :shopify_id, :email
   
   def matches?(dt)
     case dt.customer_criteria

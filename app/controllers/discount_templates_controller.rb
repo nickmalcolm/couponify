@@ -31,6 +31,8 @@ class DiscountTemplatesController < ApplicationController
   # POST /discount_templates
   # POST /discount_templates.xml
   def create
+    params[:discount_template][:shop_id] = current_shop.id unless params[:discount_template].nil?
+    
     @discount_template = DiscountTemplate.new(params[:discount_template])
 
     respond_to do |format|
