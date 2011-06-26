@@ -64,6 +64,7 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
+    assert_select "#discount_template_#{@discount_template.id}"
     assert_response :success
     assert_not_nil assigns(:discount_templates)
   end
