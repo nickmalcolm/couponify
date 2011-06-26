@@ -61,12 +61,15 @@ class LoggedInDiscountsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:discounts)
+    discounts = assigns(:discounts)
+    assert_not_nil discounts
+    assert discounts.include? @discount
   end
 
   test "should show discount" do
     get :show, :id => @discount.to_param
     assert_response :success
+    assert_equal @discount, assigns(:discount)
   end
   
 end
