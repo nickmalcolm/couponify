@@ -5,10 +5,16 @@ class DiscountsControllerTest < ActionController::TestCase
     @discount = Factory(:discount)
   end
 
-  test "should get index" do
+  test "shouldn't get index when logged out" do
     get :index
-    assert_response :success
-    assert_not_nil assigns(:discounts)
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+  
+  test "shouldn't show discount when logged out" do
+    get :show, :id => @discount.to_param
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
   end
 
   test "shouldn't get new" do
@@ -21,11 +27,6 @@ class DiscountsControllerTest < ActionController::TestCase
     assert_raises ActionController::RoutingError do
       post :create, :discount => {:customer => Factory(:fake_customer)}
     end
-  end
-
-  test "should show discount" do
-    get :show, :id => @discount.to_param
-    assert_response :success
   end
 
   test "shouldn't get edit" do
@@ -45,4 +46,28 @@ class DiscountsControllerTest < ActionController::TestCase
       delete :destroy, :id => @discount.to_param
     end
   end
+  
 end
+require 'test_helper'
+
+class LoggedInDiscountsControllerTest < ActionController::TestCase
+  tests DiscountsController
+  
+  setup do
+    @discount = Factory(:discount)
+    login_as Factory(:shop)
+  end
+
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:discounts)
+  end
+
+  test "should show discount" do
+    get :show, :id => @discount.to_param
+    assert_response :success
+  end
+  
+end
+

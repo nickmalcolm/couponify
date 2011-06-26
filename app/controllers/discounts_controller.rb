@@ -1,5 +1,7 @@
 class DiscountsController < ApplicationController
   
+  around_filter :shopify_session
+  
   def index
     @discounts = Discount.all
 
