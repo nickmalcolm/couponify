@@ -1,5 +1,7 @@
 class DiscountTemplatesController < ApplicationController
   
+  around_filter :shopify_session
+  
   def index
     @discount_template = DiscountTemplate.new(:starts_at => DateTime.now, :order_placed_after => DateTime.now)
     @discount_templates = DiscountTemplate.all

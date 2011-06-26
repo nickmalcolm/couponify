@@ -5,6 +5,63 @@ class DiscountTemplatesControllerTest < ActionController::TestCase
     @discount_template = Factory(:discount_template)
   end
 
+  test "should not get index" do
+    get :index
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+
+  test "should not get new" do
+    get :new
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+  
+  test "should not get create" do
+    assert_difference('DiscountTemplate.count', 0) do
+      post :create, :discount_template => @discount_template.attributes
+    end
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+  
+  test "should show discount_template" do
+    get :show, :id => @discount_template.to_param
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+
+  test "should not get edit" do
+    get :edit, :id => @discount_template.to_param
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+
+  test "should not update discount_template" do
+    put :update, :id => @discount_template.to_param, :discount_template => @discount_template.attributes
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+
+  test "should not destroy discount_template" do
+    assert_difference('DiscountTemplate.count', 0) do
+      delete :destroy, :id => @discount_template.to_param
+    end
+    
+    assert_redirected_to login_path
+    assert_not_nil flash[:error]
+  end
+  
+end
+class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
+  tests DiscountTemplatesController
+  
+  setup do
+    shop = Factory(:shop)
+    login_as(shop)
+    @discount_template = Factory(:discount_template)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -65,6 +122,7 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
                 :discount_type =>"fixed_amount", 
                 :minimum_order_amount =>"", 
                 :value =>"" }
+    login_as(Factory(:shop))
   end
   
   test "creating should fail with no params" do

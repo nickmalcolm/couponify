@@ -31,3 +31,7 @@ Factory.define :order do |o|
   o.buyer_accepts_marketing true
   o.shopify_customer_id 1234
 end
+
+Factory.define :shop do |s|
+  s.domain "example.com"
+end
