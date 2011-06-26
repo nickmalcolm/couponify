@@ -10,7 +10,7 @@ class LoginController < ApplicationController
 
   def authenticate
     if params[:shop].present?
-      redirect_to ShopifyAPI::Session.new(params[:shop].to_s).create_permission_url
+      redirect_to ShopifyAPI::Session.new(params[:shop].to_s.strip).create_permission_url
     else
       redirect_to return_address
     end
@@ -26,11 +26,7 @@ class LoginController < ApplicationController
     if shopify_session.valid?
       session[:shopify] = shopify_session
       flash[:notice] = "Logged in to shopify store."
-      
-      shop = Shop.find_or_create_by_domain(params[:shop])
-      shop.api_password = Digest::MD5.hexdigest(ShopifyAPI::Session.secret + params[:t])
-      shop.save!
-      
+
       redirect_to return_address
       session[:return_to] = nil
     else
@@ -49,6 +45,6 @@ class LoginController < ApplicationController
   protected
   
   def return_address
-    session[:return_to] || discount_templates_url
+    session[:return_to] || root_url
   end
 end
