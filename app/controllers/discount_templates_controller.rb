@@ -12,7 +12,7 @@ class DiscountTemplatesController < ApplicationController
   end
 
   def show
-    @discount_template = DiscountTemplate.find(params[:id])
+    @discount_template = current_shop.discount_templates.find(params[:id])
 
     respond_to do |format|
       format.html

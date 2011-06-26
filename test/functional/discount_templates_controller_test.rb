@@ -59,7 +59,7 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
   setup do
     shop = Factory(:shop)
     login_as(shop)
-    @discount_template = Factory(:discount_template)
+    @discount_template = Factory(:discount_template, :shop => shop)
   end
 
   test "should get index" do
@@ -85,6 +85,12 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
   test "should show discount_template" do
     get :show, :id => @discount_template.to_param
     assert_response :success
+  end
+  
+  test "shouldn't show other shop's templates" do
+    assert_raises ActiveRecord::RecordNotFound do
+      get :show, :id => Factory(:discount_template).to_param
+    end
   end
 
   test "should get edit" do
