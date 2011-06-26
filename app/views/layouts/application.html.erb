@@ -15,13 +15,10 @@
         <ul id="tabs">
           <% if current_shop %>
             <li>
-              <%= link_to "Shopify", "https://#{current_shop.url}/admin", :class => 'shop_name' %>
-            </li>
-            <li>
               <%= link_to 'Templates', discount_templates_path %>
             </li>
             <li>
-              <%= link_to 'Stats', discount_templates_path %>
+              <%= link_to "Shopify", "https://#{current_shop.url}/admin", :class => 'shop_name' %>
             </li>
           <% else %>
             <li>
