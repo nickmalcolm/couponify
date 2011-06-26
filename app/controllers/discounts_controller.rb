@@ -3,7 +3,7 @@ class DiscountsController < ApplicationController
   around_filter :shopify_session
   
   def index
-    @discounts = Discount.all
+    @discounts = current_shop.discounts.all
 
     respond_to do |format|
       format.html
@@ -11,7 +11,7 @@ class DiscountsController < ApplicationController
   end
 
   def show
-    @discount = Discount.find(params[:id])
+    @discount = current_shop.discounts.find(params[:id])
 
     respond_to do |format|
       format.html

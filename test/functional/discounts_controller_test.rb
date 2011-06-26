@@ -54,8 +54,10 @@ class LoggedInDiscountsControllerTest < ActionController::TestCase
   tests DiscountsController
   
   setup do
-    @discount = Factory(:discount)
-    login_as Factory(:shop)
+    shop = Factory(:shop)
+    @discount = Factory(:discount, :shop => shop)
+    @boo = Factory(:discount)
+    login_as shop
   end
 
   test "should get index" do
@@ -65,11 +67,22 @@ class LoggedInDiscountsControllerTest < ActionController::TestCase
     assert_not_nil discounts
     assert discounts.include? @discount
   end
+  
+  test "index shouldn't show other shop's discount" do
+    get :index
+    assert !(assigns(:discounts).include? @boo)
+  end
 
   test "should show discount" do
     get :show, :id => @discount.to_param
     assert_response :success
     assert_equal @discount, assigns(:discount)
+  end
+  
+  test "show shouldn't show other shop's discount" do
+    assert_raises ActiveRecord::RecordNotFound do
+      get :show, :id => @boo.to_param
+    end
   end
   
 end
