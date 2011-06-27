@@ -22,21 +22,6 @@ class DiscountTemplate < ActiveRecord::Base
                   :minimum_order_amount, :usage_limit, :customer_criteria,
                   :order_placed_before, :order_placed_after, :shop_id, :shop
   
-  def value_str
-    if discount_type.eql? "fixed_amount"
-      shop.money_with_currency_format.gsub("{{amount}}", pad_number(value))
-    else
-      number_to_percentage(value)
-    end
-  end
-  
-  def pad_number(number, min_decimals=2)
-    s = "%g" % number
-    decimals = (s[/\.(\d+)/,1] || "").length
-    s << "." if decimals == 0
-    s << "0"*[0,min_decimals-decimals].max
-  end
-  
   private
     def percentage_lte_100
       self.errors.add(:value, " is over 100%") if (discount_type.eql? "percentage") && (value > 100)
