@@ -22,14 +22,14 @@ class Order < ActiveRecord::Base
     (customer.matches? dt)
   end
   
-  def self.new_from_shopify(shopify_order, shop_id)
+  def self.new_from_shopify(shopify_order, shop)
     a = shopify_order.attributes
     
-    c = Customer.new_from_shopify(shopify_order.customer, shop_id)
+    c = Customer.new_from_shopify(shopify_order.customer, shop)
     
     o =  Order.new(a)
     o.shopify_id = a["id"]
-    o.shop_id = shop_id
+    o.shop = shop
     o.customer = c
     o
   end
