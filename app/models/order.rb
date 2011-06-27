@@ -26,9 +26,12 @@ class Order < ActiveRecord::Base
   def self.new_from_shopify(shopify_order, shop_id)
     a = shopify_order.attributes
     
+    c = Customer.new_from_shopify(shopify_order.customer, shop_id)
+    
     o =  Order.new(a)
     o.shopify_id = a["id"]
     o.shop_id = shop_id
+    o.customer = c
     o
   end
                         

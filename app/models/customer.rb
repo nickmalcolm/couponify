@@ -19,4 +19,17 @@ class Customer < ActiveRecord::Base
     end
   end
   
+  def self.new_from_shopify(shopify_customer, shop_id)
+    a = shopify_customer.attributes
+    
+    c = Customer.new(a)
+    c.accepts_marketing = a["accepts_marketing"]
+    c.shopify_id = a["id"]
+    c.first_name = a["first_name"]
+    c.last_name = a["last_name"]
+    c.total_spent = a["total_spent"]
+    c.shop_id = shop_id
+    c
+  end
+  
 end
