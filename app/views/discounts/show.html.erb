@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <b>Allocated to:</b>
+  <%= link_to @discount.customer.name, @discount.customer.shopify_url %>
+</p>
+
+<p>
   <b>Template:</b>
   <%= sanitize template_descr(@discount.discount_template) %>
 </p>

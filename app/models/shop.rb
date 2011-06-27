@@ -10,6 +10,10 @@ class Shop < ActiveRecord::Base
     "https://"+ShopifyAPI::Session.api_key+":"+api_password+"@"+domain+"/admin"
   end
   
+  def shopify_admin_url
+    "https://"+domain+"/admin"
+  end
+  
   def update_from_shopify
     shopify_api_connection
     shopify_shop = ShopifyAPI::Shop.current

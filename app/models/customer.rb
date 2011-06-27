@@ -9,6 +9,14 @@ class Customer < ActiveRecord::Base
   
   attr_accessible :orders_count, :shop, :shopify_id, :email
   
+  def name
+    "#{first_name} #{last_name} (#{email})"
+  end
+  
+  def shopify_url
+    "#{shop.shopify_admin_url}/customers/#{shopify_id}"
+  end
+  
   def matches?(dt)
     case dt.customer_criteria
     when "all"
