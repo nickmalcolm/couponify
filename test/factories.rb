@@ -15,6 +15,7 @@ end
 Factory.define :discount do |d|
   d.association :customer, :factory => :fake_customer
   d.association :shop, :factory => :shop
+  d.association :discount_template
 end
 
 Factory.define :discount_template do |dt|

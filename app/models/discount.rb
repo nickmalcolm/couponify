@@ -5,10 +5,11 @@ class Discount < ActiveRecord::Base
   belongs_to :discount_template
   
   validates_presence_of :customer
+  validates_presence_of :discount_template
   validates_uniqueness_of :code, :scope => :customer_id
   validates :shop, :presence => true
   
-  attr_accessible :customer, :shop
+  attr_accessible :customer, :shop, :discount_template
   
   def initialize(*args)
     super(*args)
