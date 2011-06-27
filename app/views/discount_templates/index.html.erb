@@ -41,7 +41,7 @@
         <td style="width:15%;text-align:center;"><%= content_tag :h2, @b %><p>used, <%= @a-@b %> left</p></td>
         <td style="width:15%;text-align:center;"><%= number_to_currency @c %></td>
         <td style="width:15%;text-align:center;"><%= number_to_currency @d %></td>
-        <td class="description"><%= link_to sanitize(long_description(discount_template)), discount_template_path(discount_template) %></td>
+        <td class="description"><%= link_to sanitize(template_descr(discount_template)), discount_template_path(discount_template) %></td>
       <% end %>
       <% end %>
     </tbody>
