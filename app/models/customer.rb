@@ -4,7 +4,7 @@ class Customer < ActiveRecord::Base
   
   validates :shop, :presence => true
   validates :email, :presence => true
-  validates :shopify_id, :presence => true
+  validates :shopify_id, :presence => true, :uniqueness => true
   
   attr_accessible :orders_count, :shop, :shopify_id, :email
   

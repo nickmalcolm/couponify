@@ -10,6 +10,11 @@ class CustomerTest < ActiveSupport::TestCase
     assert Customer.create!(:email => "bob@example.com", :shopify_id => "1234", :shop => Factory(:shop)).valid?
   end
   
+  test "shopify_id must be unique" do
+    Customer.create!(:email => "bob@example.com", :shopify_id => "1234", :shop => Factory(:shop))
+    assert Customer.new(:email => "rod@example.com", :shopify_id => "1234", :shop => Factory(:shop)).invalid?
+  end
+  
 end
 class CustomerMatchingTest < ActiveSupport::TestCase
   
