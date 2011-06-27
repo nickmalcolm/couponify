@@ -28,6 +28,7 @@ class LoginController < ApplicationController
       flash[:notice] = "Logged in to shopify store."
       
       shop = Shop.find_or_create_by_domain(shopify_session.url)
+      shop.update_from_shopify
       shop.api_password = Digest::MD5.hexdigest(ShopifyAPI::Session.secret + params[:t])
       shop.save!
 
