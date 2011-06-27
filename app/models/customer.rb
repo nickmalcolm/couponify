@@ -22,7 +22,7 @@ class Customer < ActiveRecord::Base
   def self.new_from_shopify(shopify_customer, shop_id)
     a = shopify_customer.attributes
     
-    c = Customer.new(a)
+    c = Customer.find_or_create_by_shopify_id(a["id"], a)
     c.accepts_marketing = a["accepts_marketing"]
     c.shopify_id = a["id"]
     c.first_name = a["first_name"]
