@@ -32,7 +32,7 @@
   </span>
 
   a <%= f.text_field :value, :size=>"7" %><select id="discount_template_discount_type" name="discount_template[discount_type]">
-    <option value="fixed_amount">USD</option>
+    <option value="fixed_amount"><%= current_shop.currency %></option>
     <option value="percentage">%</option> 
   </select> discount code. This code can be used 
   
