@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   
   belongs_to :shop
-  belongs_to :customer, :foreign_key => :shopify_customer_id, :primary_key => :shopify_id
+  belongs_to :customer
   
   validates :shop, :presence => true
   validates :email, :presence => true
@@ -10,11 +10,10 @@ class Order < ActiveRecord::Base
   validates :total_line_items_price, :presence => true, :numericality => true
   validates :subtotal_price, :presence => true, :numericality => true
   validates :buyer_accepts_marketing, :presence => true
-  validates :shopify_customer_id, :presence => true, :numericality => true
   
   
   attr_accessible :email, :total_price, :shopify_id, :total_line_items_price, :subtotal_price,
-                  :buyer_accepts_marketing, :shopify_customer_id, :shop, :name, :total_discounts
+                  :buyer_accepts_marketing, :shop, :name, :total_discounts
                   
   def matches?(dt)
     (dt.order_placed_after  < created_at) &&

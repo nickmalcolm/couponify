@@ -1,13 +1,12 @@
 Factory.define :customer do |c|
   c.email { Faker::Internet.email }
   c.association :shop, :factory => :shop
-  c.shopify_id "123abc"
+  c.sequence(:shopify_id) { |n| n }
 end
 
 Factory.define :fake_customer, :parent => :customer do |c|
   c.first_name { Faker::Name.first_name }
   c.last_name { Faker::Name.last_name }
-  c.sequence(:shopify_id) { |n| n }
   c.accepts_marketing true
   c.orders_count rand(5)
   c.total_spent rand(100.00)
@@ -33,7 +32,6 @@ Factory.define :order do |o|
   o.total_line_items_price 7.00
   o.subtotal_price 7.00
   o.buyer_accepts_marketing true
-  o.shopify_customer_id 1234
   o.association :shop, :factory => :shop
 end
 

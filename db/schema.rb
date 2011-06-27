@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110626235301) do
+ActiveRecord::Schema.define(:version => 20110627003822) do
 
   create_table "customers", :force => true do |t|
     t.string   "email"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20110626235301) do
     t.decimal  "total_line_items_price",  :precision => 16, :scale => 2
     t.decimal  "subtotal_price",          :precision => 16, :scale => 2
     t.boolean  "buyer_accepts_marketing"
-    t.integer  "shopify_customer_id"
+    t.integer  "customer_id"
     t.string   "discount_code"
     t.datetime "created_at"
     t.datetime "updated_at"
