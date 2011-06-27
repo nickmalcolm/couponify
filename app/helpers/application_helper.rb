@@ -17,4 +17,8 @@ module ApplicationHelper
     d += "</strong>."
   end
   
+  def amount_as_currency(amount, shop)
+    shop.money_with_currency_format.gsub("{{amount}}", "#{amount}")
+  end
+  
 end

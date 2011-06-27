@@ -24,9 +24,9 @@ class DiscountTemplate < ActiveRecord::Base
   
   def value_str
     if discount_type.eql? "fixed_amount"
-      "$#{value.to_f}"
+      shop.money_with_currency_format.gsub("{{amount}}", "#{value}")
     else
-      "#{value.to_f}%"
+      "#{value}%"
     end
   end
   
