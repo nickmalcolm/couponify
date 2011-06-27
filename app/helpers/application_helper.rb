@@ -18,7 +18,14 @@ module ApplicationHelper
   end
   
   def amount_as_currency(amount, shop)
-    shop.money_with_currency_format.gsub("{{amount}}", "#{amount}")
+    shop.money_with_currency_format.gsub("{{amount}}", pad_number(amount))
+  end
+  
+  def pad_number(number, min_decimals=2)
+    s = "%g" % number
+    decimals = (s[/\.(\d+)/,1] || "").length
+    s << "." if decimals == 0
+    s << "0"*[0,min_decimals-decimals].max
   end
   
 end
