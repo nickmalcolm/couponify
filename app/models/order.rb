@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   
   
   attr_accessible :email, :total_price, :shopify_id, :total_line_items_price, :subtotal_price,
-                  :buyer_accepts_marketing, :shopify_customer_id, :shop
+                  :buyer_accepts_marketing, :shopify_customer_id, :shop, :name, :total_discounts
                   
   def matches?(dt)
     (dt.order_placed_after  < created_at) &&
@@ -22,5 +22,14 @@ class Order < ActiveRecord::Base
     (dt.minimum_order_amount.nil? ? true : (dt.minimum_order_amount < total_price) ) &&
     (customer.matches? dt)
   end
-                                                        
+  
+  def self.new_from_shopify(shopify_order, shop_id)
+    a = shopify_order.attributes
+    
+    o =  Order.new(a)
+    o.shopify_id = a["id"]
+    o.shop_id = shop_id
+    o
+  end
+                        
 end                                                     
