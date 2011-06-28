@@ -8,15 +8,7 @@
   <%= render 'sentence_form' %>
 </section>
 
-<section id="graph">
-  <p>Graph</p>
-</section>
-
-<div id="existing_templates_toggle" style="text-align:center">
-  <h2>Show existing templates</h2>
-</div>
-
-<section id="existing_templates" style="display:none">
+<section id="existing_templates">
   <h2>Existing Templates</h2>
 
   <table>
@@ -36,22 +28,23 @@
         </th>
       </tr>
       <% @discount_templates.each_with_index do |discount_template, i| %>
-      <%= content_tag_for :tr, discount_template, :class=>(i.odd? ? "odd" : ""), "data-url"=>discount_template_path(discount_template) do%>
-        <% @a = rand(10).ceil; @b = rand(@a).floor; @c = @b*rand(9.99); @d = @c+(@b*rand(9.99)) %>
-        <td style="width:15%;text-align:center;"><%= content_tag :h2, @b %><p>used, <%= @a-@b %> left</p></td>
-        <td style="width:15%;text-align:center;"><%= sanitize(amount_as_currency @c, current_shop) %></td>
-        <td style="width:15%;text-align:center;"><%= sanitize(amount_as_currency @d, current_shop) %></td>
-        <td class="description"><%= link_to sanitize(template_descr(discount_template)), discount_template_path(discount_template) %></td>
+      <%= content_tag_for :tr, discount_template, :class=>(i.odd? ? "odd" : ""), "data-url"=>discount_template_path(discount_template) do %>
+        <td style="width:15%;text-align:center;">
+          <%= content_tag :h2, discount_template.discounts.used.count %>
+          <p>used, <%= discount_template.discounts.unused.count %> left</p>
+        </td>
+        <td style="width:15%;text-align:center;">
+          <%= sanitize(amount_as_currency "2", current_shop) %>
+        </td>
+        <td style="width:15%;text-align:center;">
+          <%= sanitize(amount_as_currency "3", current_shop) %>
+        </td>
+        <td class="description">
+          <%= link_to sanitize(template_descr(discount_template)), discount_template_path(discount_template) %>
+        </td>
       <% end %>
       <% end %>
     </tbody>
   </table>
 
 </section>
-
-<% content_for(:jquery) do %>
-  $(".discount_template").click(function(){
-    location.href = $(this).attr("data-url");
-  });
-  slider("#existing_templates_toggle","#existing_templates");
-<% end %>
