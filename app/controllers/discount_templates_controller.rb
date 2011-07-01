@@ -8,6 +8,9 @@ class DiscountTemplatesController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.json do
+        render :json => @discount_templates
+      end
     end
   end
 
