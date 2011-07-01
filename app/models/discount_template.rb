@@ -21,6 +21,16 @@ class DiscountTemplate < ActiveRecord::Base
   attr_accessible :value, :discount_type, :starts_at, :ends_at, 
                   :minimum_order_amount, :usage_limit, :customer_criteria,
                   :order_placed_before, :order_placed_after, :shop_id, :shop
+                  
+  def as_json(options={})
+    hash = Hash.new
+    hash[:title] = id.to_s
+    hash[:all_day] = true
+    hash[:start] = order_placed_after
+    hash[:end] = order_placed_before
+    hash[:id] = id
+    return hash
+  end
   
   private
     def percentage_lte_100

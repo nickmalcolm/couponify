@@ -1,50 +1,43 @@
+<% content_for(:head) do %>
+  <%= stylesheet_link_tag "fullcalendar" %>
+  <%= javascript_include_tag "fullcalendar.min.js" %>
+<% end %>
 <h1>Promotions</h1>
 
-<p class="help_text">Promotions let you target specific customers and offer them discount coupons for their next order. When someone places an order which matches one of your promotions, they'll be sent a discount code. For more information on how this works, check out the <a>Help</a> page.</p>
-
-<section id="new_template">
-  <h2>Make a New Promotion</h2>
-
-  <%= render 'sentence_form' %>
-</section>
-
-<section id="existing_templates">
-  <h2>Existing Promotions</h2>
-
-  <table>
-    <tbody>
-      <tr>
-        <th>
-          Codes
-        </th>
-        <th>
-          Discounts
-        </th>
-        <th>
-          Net Sales
-        </th>
-        <th>
-          Description
-        </th>
-      </tr>
-      <% @discount_templates.each_with_index do |discount_template, i| %>
-      <%= content_tag_for :tr, discount_template, :class=>(i.odd? ? "odd" : ""), "data-url"=>discount_template_path(discount_template) do %>
-        <td style="width:15%;text-align:center;">
-          <%= content_tag :h2, discount_template.discounts.used.count %>
-          <p>used, <%= discount_template.discounts.unused.count %> left</p>
-        </td>
-        <td style="width:15%;text-align:center;">
-          <%= sanitize(amount_as_currency "2", current_shop) %>
-        </td>
-        <td style="width:15%;text-align:center;">
-          <%= sanitize(amount_as_currency "3", current_shop) %>
-        </td>
-        <td class="description">
-          <%= link_to sanitize(template_descr(discount_template)), discount_template_path(discount_template) %>
-        </td>
-      <% end %>
-      <% end %>
-    </tbody>
-  </table>
-
-</section>
+<div id="calendar" class="grid12" ><div class="clear"></div></div>
+&nbsp;
+<% content_for(:jquery) do %>
+  var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	
+	var calendar = $('#calendar').fullCalendar({
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: ''
+		},
+		selectable: true,
+		selectHelper: true,
+		firstDay: 1,
+		aspectRatio: 2,
+		select: function(start, end, allDay) {
+			var title = prompt('Event Title:');
+			if (title) {
+				calendar.fullCalendar('renderEvent',
+					{
+						title: title,
+						start: start,
+						end: end,
+						allDay: allDay
+					},
+					true // make the event "stick"
+				);
+			}
+			calendar.fullCalendar('unselect');
+		},
+		editable: true,
+		events: 'discount_templates.json'
+	});
+<% end %>
