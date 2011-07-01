@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag :all, "reset", "cupertino/jquery-ui-1.8.13.custom.css", "960", "formtastic", "style" %>
   <%= javascript_include_tag "application", "jquery-1.6.1.min.js", "jquery-ui-1.8.13.custom.min.js" %>
   <%= csrf_meta_tag %>
+  <%= content_for(:head) %>
 </head>
 
 <body>
