@@ -5,7 +5,9 @@
 <h1>Promotions</h1>
 
 <div id="calendar" class="grid12" ><div class="clear"></div></div>
-&nbsp;
+<%= link_to "fancy?", edit_discount_template_path(DiscountTemplate.first), :id => "inline" %>
+
+<div id="popup" class="prefix2 grid8" style="display:none;"></div>
 <% content_for(:jquery) do %>
   var date = new Date();
 	var d = date.getDate();
@@ -37,7 +39,18 @@
 			}
 			calendar.fullCalendar('unselect');
 		},
-		editable: true,
-		events: 'discount_templates.json'
+		events: 'discount_templates.json',
+		eventClick: function(event) {
+      if (event.url) {
+        $.fancybox({
+            'transitionIn': 'none',
+            'transitionOut': 'none',
+            'type': 'ajax',
+            'href': event.url
+        });
+      }
+      
+      return false;
+    }
 	});
 <% end %>

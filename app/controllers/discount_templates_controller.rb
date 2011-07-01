@@ -25,6 +25,7 @@ class DiscountTemplatesController < ApplicationController
   # GET /discount_templates/1/edit
   def edit
     @discount_template = DiscountTemplate.find(params[:id])
+    render :layout => nil
   end
   
   def new
