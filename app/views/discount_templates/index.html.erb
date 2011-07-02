@@ -75,6 +75,9 @@
 		editable: true,
 		eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
 		  postDate(event);
-     }
+     },
+    eventResize: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+ 		  postDate(event);
+    }
 	});
 <% end %>
