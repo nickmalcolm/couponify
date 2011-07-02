@@ -1,6 +1,3 @@
-<h1>Editing discount_template</h1>
+<%= content_tag :h2, "Edit #{@discount_template.title}"%>
 
-<%= render 'sentence_form' %>
-
-<%= link_to 'Show', @discount_template %> |
-<%= link_to 'Back', discount_templates_path %>
+<%= render 'form' %>

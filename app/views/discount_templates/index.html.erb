@@ -43,10 +43,16 @@
 		eventClick: function(event) {
       if (event.url) {
         $.fancybox({
+            'autoDimensions': false,
+            'width': 300,
+            'height': 400,
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'ajax',
-            'href': event.url
+            'href': event.url,
+            'onClosed': function(){
+              $("#calendar").fullCalendar('refetchEvents');
+            }
         });
       }
       
