@@ -14,6 +14,20 @@
 	var m = date.getMonth();
 	var y = date.getFullYear();
 	
+	function postDate(event){
+	  end = event.end
+	  if(end != null){
+	    end = end.toDateString();
+	  }
+	  $.ajax({
+       type: "POST",
+       url: event.url,
+       data: { _method:'PUT', discount_template: {order_placed_before: end, order_placed_after: event.start.toDateString()}},
+       success: function(msg){
+       }
+     });
+	}
+	
 	var calendar = $('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
@@ -60,18 +74,7 @@
     },
 		editable: true,
 		eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
-		  end = event.end
-		  if(end != null){
-		    end = end.toDateString();
-		  }
-		  $.ajax({
-         type: "POST",
-         url: event.url,
-         data: { _method:'PUT', discount_template: {order_placed_before: end, order_placed_after: event.start.toDateString()}},
-         success: function(msg){
-           console.log(msg);
-         }
-       });
+		  postDate(event);
      }
 	});
 <% end %>
