@@ -54,6 +54,7 @@
 		},
 		eventRender: function(event, element) {
 		  $(element).attr('id', 'fc_event_'+event.id);
+		  $(element).attr('title', 'Click to edit '+event.title);
 		},
 		events: 'discount_templates.json',
 		ignoreTimezone: false,
@@ -61,7 +62,7 @@
       if (event.url) {
         $.fancybox({
             'autoDimensions': false,
-            'width': 300,
+            'width': 600,
             'height': 400,
             'transitionIn': 'none',
             'transitionOut': 'none',
