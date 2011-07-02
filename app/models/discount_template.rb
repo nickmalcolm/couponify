@@ -17,6 +17,7 @@ class DiscountTemplate < ActiveRecord::Base
   validate :dates_after_now, :on => [:create]
   
   before_validation :nils_to_defaults
+  before_validation :dates_to_midnight
   
   attr_accessible :value, :discount_type, :starts_at, :ends_at, :title,
                   :minimum_order_amount, :usage_limit, :customer_criteria,
@@ -48,6 +49,12 @@ class DiscountTemplate < ActiveRecord::Base
     def ends_after_starts
       self.errors.add(:ends_at, "is before the start date") if (!ends_at.nil? && (ends_at <= starts_at))
       self.errors.add(:order_placed_before, "is before the start date") if (!order_placed_before.nil? && (order_placed_before <= order_placed_after))
+    end
+    
+    def dates_to_midnight
+      
+      self.order_placed_after  = self.order_placed_after.utc.beginning_of_day
+      self.order_placed_before = self.order_placed_before.utc.beginning_of_day unless self.order_placed_before.nil?
     end
     
     def dates_after_now
