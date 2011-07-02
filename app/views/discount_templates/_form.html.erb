@@ -1,4 +1,29 @@
-<%= semantic_form_for(@discount_template) do |f| %>
-  <%= f.inputs %>
+<%= semantic_form_for @discount_template, :html => {:id => "discount_template_form"}, :remote => true do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :customer_criteria, :as => :select, :collection => ["all","new","repeat"], :required => true, :include_blank => false, :remote => true %>
+    <div class="grid4 first">
+      <div class="grid2 first">
+      <%= f.input :value %>
+      </div>
+      <div class="grid2 first">
+      <%= f.input :discount_type, :as => :select, :collection => [[current_shop.currency, "fixed_amount"], ["%", "percentage"]], :include_blank => false, :label => "" %>
+      </div >
+    </div>
+    <%= f.input :order_placed_before, :as => :hidden %>
+  <% end %>
   <%= f.buttons %>
+<% end %>
+
+<% content_for(:jquery) do %>
+  $("#count_template_submit").bind("ajax:beforeSend", function() {
+    $("#sub_msg").show().html("Subscribing you...");
+    $("#subscription_submit").hide();
+  }).bind("ajax:success", function() {
+    $("#cta_subscription").hide();
+    $("#subscribe_success").prepend("You have been subscribed!<br />&nbsp;<br />")
+    $("#subscribe_success").fadeIn('slow')
+  }).bind("ajax:error", function() {
+    $("#subscription_submit").show();
+    $("#sub_msg").show().html("<span style='color: #CC0000;'>Something went wrong... You'll have to try again!</span>")
 <% end %>
