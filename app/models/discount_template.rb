@@ -18,13 +18,13 @@ class DiscountTemplate < ActiveRecord::Base
   
   before_validation :nils_to_defaults
   
-  attr_accessible :value, :discount_type, :starts_at, :ends_at, 
+  attr_accessible :value, :discount_type, :starts_at, :ends_at, :title,
                   :minimum_order_amount, :usage_limit, :customer_criteria,
                   :order_placed_before, :order_placed_after, :shop_id, :shop
                   
   def as_json(options={})
     hash = Hash.new
-    hash[:title] = id.to_s
+    hash[:title] = title
     hash[:all_day] = true
     hash[:start] = order_placed_after
     hash[:end] = order_placed_before
