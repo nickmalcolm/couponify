@@ -57,10 +57,10 @@ class DiscountTemplatesController < ApplicationController
     respond_to do |format|
       if @discount_template.update_attributes(params[:discount_template])
         format.html { redirect_to(@discount_template, :notice => 'Discount template was successfully updated.') }
-        format.xml  { head :ok }
+        format.js
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @discount_template.errors, :status => :unprocessable_entity }
+        format.js
       end
     end
   end

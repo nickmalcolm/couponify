@@ -1,0 +1,13 @@
+<% if @discount_template.errors.any? %>
+  $("#discount_template_form > .errors").html("");
+  var error_html = "<div class='errors'><h3>Whoops - you'll have to fix some things:</h3><ul>"
+  
+  <% @discount_template.errors.each do |field, message| %>
+    $("#discount_template_<%= field %>_input").parent().parent().removeClass("error").addClass("error");
+    error_html += "<li><%= "#{field} #{message}" %></li>"
+  <% end %>
+  
+  $("#discount_template_form").prepend(error_html+"</ul></div>")
+<% else %>
+  $.fancybox.close()
+<% end %>
