@@ -40,6 +40,7 @@
 			calendar.fullCalendar('unselect');
 		},
 		events: 'discount_templates.json',
+		ignoreTimezone: false,
 		eventClick: function(event) {
       if (event.url) {
         $.fancybox({
@@ -61,12 +62,12 @@
 		eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
 		  end = event.end
 		  if(end != null){
-		    end = end.toString();
+		    end = end.toDateString();
 		  }
 		  $.ajax({
          type: "POST",
          url: event.url,
-         data: { _method:'PUT', discount_template: {order_placed_before: end, order_placed_after: event.start.toString()}},
+         data: { _method:'PUT', discount_template: {order_placed_before: end, order_placed_after: event.start.toDateString()}},
          success: function(msg){
            console.log(msg);
          }
