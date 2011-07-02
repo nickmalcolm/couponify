@@ -9,7 +9,7 @@ class DiscountTemplatesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => @discount_templates
+        render :json => DiscountTemplate.where("order_placed_before >= ? && order_placed_after <= ?", Time.at(params[:start].to_i), Time.at(params[:end].to_i))
       end
     end
   end

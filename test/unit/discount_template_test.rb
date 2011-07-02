@@ -85,13 +85,6 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     assert d.invalid?
   end
   
-  test "can't have dates before now" do
-    assert Factory.build(:discount_template, :starts_at => 1.day.ago).invalid?
-    assert Factory.build(:discount_template, :ends_at => 1.day.ago).invalid?
-    assert Factory.build(:discount_template, :order_placed_after => 1.day.ago).invalid?
-    assert Factory.build(:discount_template, :order_placed_before => 1.day.ago).invalid?
-  end
-  
   test "can't have coupon ends at equal or before starts" do
     odfn = 1.day.from_now
     assert Factory.build(:discount_template, :starts_at => odfn, :ends_at => odfn).invalid?

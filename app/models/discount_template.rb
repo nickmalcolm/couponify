@@ -14,7 +14,6 @@ class DiscountTemplate < ActiveRecord::Base
   
   validate :percentage_lte_100
   validate :ends_after_starts
-  validate :dates_after_now, :on => [:create]
   
   before_validation :nils_to_defaults
   before_validation :dates_to_midnight
@@ -55,13 +54,5 @@ class DiscountTemplate < ActiveRecord::Base
       
       self.order_placed_after  = self.order_placed_after.utc.beginning_of_day
       self.order_placed_before = self.order_placed_before.utc.beginning_of_day unless self.order_placed_before.nil?
-    end
-    
-    def dates_after_now
-      now = DateTime.now.utc.midnight
-      self.errors.add(:starts_at, "is before the current date") if starts_at < now
-      self.errors.add(:ends_at, "is before the current date") if (!ends_at.nil? && (ends_at < now))
-      self.errors.add(:order_placed_after, "is before the current date") if order_placed_after < now
-      self.errors.add(:order_placed_before, "is before the current date") if (!order_placed_before.nil? && (order_placed_before < now))
     end
 end
