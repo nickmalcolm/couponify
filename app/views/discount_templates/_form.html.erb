@@ -14,16 +14,3 @@
   <% end %>
   <%= f.buttons %>
 <% end %>
-
-<% content_for(:jquery) do %>
-  $("#count_template_submit").bind("ajax:beforeSend", function() {
-    $("#sub_msg").show().html("Subscribing you...");
-    $("#subscription_submit").hide();
-  }).bind("ajax:success", function() {
-    $("#cta_subscription").hide();
-    $("#subscribe_success").prepend("You have been subscribed!<br />&nbsp;<br />")
-    $("#subscribe_success").fadeIn('slow')
-  }).bind("ajax:error", function() {
-    $("#subscription_submit").show();
-    $("#sub_msg").show().html("<span style='color: #CC0000;'>Something went wrong... You'll have to try again!</span>")
-<% end %>
