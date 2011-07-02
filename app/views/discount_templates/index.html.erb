@@ -22,7 +22,6 @@
 		},
 		selectable: true,
 		selectHelper: true,
-		editable: true,
 		firstDay: 1,
 		aspectRatio: 2,
 		select: function(start, end, allDay) {
@@ -50,13 +49,28 @@
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'ajax',
-            'href': event.url,
+            'href': event.url+"edit",
             'onClosed': function(){
               $("#calendar").fullCalendar('refetchEvents');
             }
         });
         return false;
       }
-    }
+    },
+		editable: true,
+		eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+		  end = event.end
+		  if(end != null){
+		    end = end.toString();
+		  }
+		  $.ajax({
+         type: "POST",
+         url: event.url,
+         data: { _method:'PUT', discount_template: {order_placed_before: end, order_placed_after: event.start.toString()}},
+         success: function(msg){
+           console.log(msg);
+         }
+       });
+     }
 	});
 <% end %>

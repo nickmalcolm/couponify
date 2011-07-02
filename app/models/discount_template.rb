@@ -28,7 +28,7 @@ class DiscountTemplate < ActiveRecord::Base
     hash[:all_day] = true
     hash[:start] = order_placed_after
     hash[:end] = order_placed_before
-    hash[:url] = "discount_templates/#{id}/edit"
+    hash[:url] = "discount_templates/#{id}/"
     hash[:id] = id
     return hash
   end
