@@ -52,6 +52,9 @@
 			}
 			calendar.fullCalendar('unselect');
 		},
+		eventRender: function(event, element) {
+		  $(element).attr('id', 'fc_event_'+event.id);
+		},
 		events: 'discount_templates.json',
 		ignoreTimezone: false,
 		eventClick: function(event) {
