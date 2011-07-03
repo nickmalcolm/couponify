@@ -10,6 +10,7 @@
       <%= f.input :discount_type, :as => :select, :collection => [[current_shop.currency, "fixed_amount"], ["%", "percentage"]], :include_blank => false, :label => "" %>
       </div >
     </div>
+    <%= f.input :order_placed_after, :as => :hidden %>
     <%= f.input :order_placed_before, :as => :hidden %>
   <% end %>
   <%= f.buttons %>
