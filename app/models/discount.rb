@@ -4,8 +4,9 @@ class Discount < ActiveRecord::Base
   belongs_to :customer
   belongs_to :discount_template
   
-  validates_presence_of :customer
-  validates_presence_of :discount_template
+  validates :customer, :presence => true
+  validates :discount_template, :presence => true
+  validates :expires_at, :presence => true
   validates_uniqueness_of :code, :scope => :customer_id
   validates :shop, :presence => true
   

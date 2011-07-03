@@ -18,6 +18,7 @@ class DiscountTest < ActiveSupport::TestCase
     d.customer = @customer
     d.shop = @shop
     d.discount_template = @dt
+    d.expires_at = 3.days.from_now
     d.save!
     assert_equal 10, d.code.size
   end
