@@ -71,9 +71,9 @@
 	height: 100%;
 	box-shadow: 0 1px 2px #222222, 0 0 7px #AAAAAA inset;
 	-webkit-box-shadow: 0 1px 2px #222222, 0 0 7px #AAAAAA inset;
-    -moz-box-shadow: 0 1px 2px #222222, 0 0 7px #AAAAAA inset;
-    background: url("/images/container_background.png") repeat scroll 0 0 #F3F3F2;
-    border: 1px solid #FFFFFF;
+  -moz-box-shadow: 0 1px 2px #222222, 0 0 7px #AAAAAA inset;
+  background-color: #fff;
+  border: 1px solid #FFFFFF;
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
@@ -82,7 +82,7 @@
 #fancybox-content {
 	width: 0;
 	height: 0;
-	padding: 0;
+	padding: 10px;
 	outline: none;
 	position: relative;
 	overflow: hidden;
