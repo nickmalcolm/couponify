@@ -38,19 +38,17 @@
 		firstDay: 1,
 		aspectRatio: 2,
 		select: function(start, end, allDay) {
-			var title = prompt('Event Title:');
-			if (title) {
-				calendar.fullCalendar('renderEvent',
-					{
-						title: title,
-						start: start,
-						end: end,
-						allDay: allDay
-					},
-					true // make the event "stick"
-				);
-			}
-			calendar.fullCalendar('unselect');
+			$.fancybox({
+        'autoDimensions': false,
+        'width': 600,
+        'height': 400,
+        'transitionIn': 'none',
+        'transitionOut': 'none',
+        'type': 'ajax',
+        'href': "discount_templates/new?discount_template[start]="+start.toDateString()+"&discount_template[end]="+end.toDateString(),
+        'onClosed': function(){
+          $("#calendar").fullCalendar('refetchEvents');
+      }});
 		},
 		eventRender: function(event, element) {
 		  $(element).attr('id', 'fc_event_'+event.id);
