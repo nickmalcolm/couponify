@@ -2,6 +2,10 @@
   <%= f.inputs do %>
     <div class="grid8 inline first">
       <%= f.input :title %>
+      <p class="dates">
+        <%= "Between #{@discount_template.order_placed_after.strftime("%d %b %R")}
+        and #{@discount_template.order_placed_before.strftime("%d %b %R")}" %>
+      </p>
       <%= f.input :customer_criteria, :as => :select, :collection => ["all","new","repeat"], :required => true, :include_blank => false, :label => "Give" %> customers who spend 
       <% @mao = (@discount_template.minimum_order_amount > 0) unless @discount_template.minimum_order_amount.nil? %>
       <a id="spend_link" style="<%= "display:none" if @mao %>">any amount</a>
