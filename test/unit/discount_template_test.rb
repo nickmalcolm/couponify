@@ -101,4 +101,30 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     assert_equal midnight, d.starts_at
   end
   
+  test "valid for 2 weeks after discount is generated" do
+    d = Factory(:discount_template)
+    d.days_valid = 14
+    d.valid_type = "after_generated"
+    assert d.valid?
+  end
+  
+  test "valid for 30 days after template ends" do
+    d = Factory(:discount_template)
+    d.days_valid = 30
+    d.valid_type = "after_end_date"
+    assert d.valid?
+  end
+  
+  test "valid types" do
+    d = Factory(:discount_template)
+    d.valid_type = "after_end_date"
+    assert d.valid?
+    
+    d.valid_type = "after_generated"
+    assert d.valid?
+  
+    d.valid_type = "random"
+    assert d.invalid?
+  end
+  
 end

@@ -12,6 +12,9 @@ class DiscountTemplate < ActiveRecord::Base
   validates :minimum_order_amount, :numericality => {:greater_than_or_equal_to => 0}, :allow_nil => false
   validates :usage_limit, :numericality => {:greater_than => 0}, :allow_nil => true
   
+  validates :valid_type, :inclusion => {:in => ["after_generated", "after_end_date"]}, :allow_nil => true
+  validates :days_valid, :numericality => {:greater_than_or_equal_to => 0}, :allow_nil => true
+  
   validate :percentage_lte_100
   validate :ends_after_starts
   
