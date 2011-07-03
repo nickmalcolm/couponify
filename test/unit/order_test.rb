@@ -37,9 +37,9 @@ class OrderMatchingTest < ActiveSupport::TestCase
     @order.customer = Factory(:customer, :orders_count => 1)
   end
   
-  test "order matches empty template" do
+  test "order doesn't match template without dates" do
     #0% discount for all customers
-    assert @order.matches?(Factory(:discount_template, :value => 0, 
+    assert !@order.matches?(Factory(:discount_template, :value => 0, 
     :customer_criteria => "all", :discount_type => "percentage"))
   end
   
@@ -66,34 +66,40 @@ class OrderMatchingTest < ActiveSupport::TestCase
   test "order matches minimum amount of $1" do
     assert @order.matches?(Factory(:discount_template, :value => 0, 
     :customer_criteria => "all", :discount_type => "percentage",
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now,
     :minimum_order_amount => 1))
   end
   
   test "order does match minimum amount of $7.01" do
     assert !@order.matches?(Factory(:discount_template, :value => 0, 
     :customer_criteria => "all", :discount_type => "percentage",
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now,
     :minimum_order_amount => 7.01))
   end
   
   test "order matches with all customer criteria" do
     assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now,
     :customer_criteria => "all", :discount_type => "percentage"))
   end
   
   test "order matches with new customer criteria" do
     assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now,
     :customer_criteria => "new", :discount_type => "percentage"))
   end
   
   test "order doesn't match with repeat customer criteria" do
     assert !@order.matches?(Factory(:discount_template, :value => 0, 
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now,
     :customer_criteria => "repeat", :discount_type => "percentage"))
   end
 
-  test "order doesn match with repeat customer criteria when we increase order count" do
+  test "order doesn't match with repeat customer criteria when we increase order count" do
     @order.customer.update_attributes(:orders_count => 2)
     
     assert @order.matches?(Factory(:discount_template, :value => 0, 
+    :order_placed_after => DateTime.now, :order_placed_before => 2.days.from_now,
     :customer_criteria => "repeat", :discount_type => "percentage"))
   end
 

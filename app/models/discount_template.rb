@@ -53,6 +53,11 @@ class DiscountTemplate < ActiveRecord::Base
     
     def dates_to_midnight
       self.order_placed_after  = self.order_placed_after.utc.beginning_of_day
-      self.order_placed_before = self.order_placed_before.utc.end_of_day unless self.order_placed_before.nil?
+      
+      unless self.order_placed_before.nil?
+        self.order_placed_before = self.order_placed_before.utc.end_of_day 
+      else 
+        self.order_placed_before = self.order_placed_after.end_of_day
+      end
     end
 end

@@ -96,6 +96,12 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     assert_equal midnight, d.order_placed_after
   end
   
+  test "only start date should automagically make end date same day" do
+    date = DateTime.parse("12 July 2011 16:47")
+    d = Factory(:discount_template, :order_placed_after => date.beginning_of_day)
+    assert_equal date.end_of_day, d.order_placed_before
+  end
+  
   test "valid for 2 weeks after discount is generated" do
     d = Factory(:discount_template)
     d.days_valid = 14

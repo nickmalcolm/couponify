@@ -201,7 +201,7 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
     assert_equal "repeat", dt.customer_criteria
     assert_equal 0.00, dt.minimum_order_amount.to_f
     assert_equal @now, dt.order_placed_after
-    assert_nil dt.order_placed_before
+    assert_equal @now.end_of_day, dt.order_placed_before
     
     #Discount criteria
     assert_equal 2.00, dt.value.to_f
@@ -227,7 +227,7 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
     assert_equal "new", dt.customer_criteria
     assert_equal 5.76, dt.minimum_order_amount.to_f
     assert_equal @now, dt.order_placed_after
-    assert_nil dt.order_placed_before
+    assert_equal @now.end_of_day, dt.order_placed_before
     
     #Discount criteria
     assert_equal 25.00, dt.value.to_f
