@@ -13,7 +13,6 @@ Factory.define :fake_customer, :parent => :customer do |c|
 end
 
 Factory.define :discount do |d|
-  d.expires_at 3.days.from_now
   d.association :customer, :factory => :fake_customer
   d.association :shop, :factory => :shop
   d.association :discount_template

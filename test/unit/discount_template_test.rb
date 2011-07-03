@@ -165,4 +165,13 @@ class DiscountGenerationTest< ActiveSupport::TestCase
     assert_equal 17.days.from_now.utc.end_of_day, discount.expires_at
   end
   
+  test "can generate discount without expiry date" do
+    discount_template = Factory(:discount_template, :minimum_order_amount => 0.00, 
+      :customer_criteria => "all", :shop => @shop)
+      
+    discount = discount_template.discount_for_order(@order)
+    
+    assert_nil discount.expires_at
+  end
+  
 end

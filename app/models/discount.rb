@@ -6,7 +6,6 @@ class Discount < ActiveRecord::Base
   
   validates :customer, :presence => true
   validates :discount_template, :presence => true
-  validates :expires_at, :presence => true
   validates_uniqueness_of :code, :scope => :customer_id
   validates :shop, :presence => true
   
