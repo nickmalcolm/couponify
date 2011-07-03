@@ -32,16 +32,7 @@ function calenderfy(link, input){
 $(document).ready(
   function(){
     
-    hider("#all", "#define_customers");
-    hider("#no_limit", "#limit");
-    hider("#usage", "#discount_template_use_limit");
-    hider("#usage", "#s");
-    hider("#anytime", "#valid_time");
-    
-    calenderfy("#starts_at", "#discount_template_starts_at");
-    calenderfy("#ends_at", "#discount_template_ends_at");
-    calenderfy("#order_before", "#discount_template_order_placed_before");
-    calenderfy("#order_after", "#discount_template_order_placed_after");
+    hider("#valid_time_link", "#valid_time");
     
     $(".hide_me").hide();
     

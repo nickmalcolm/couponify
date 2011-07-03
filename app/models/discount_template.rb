@@ -21,7 +21,7 @@ class DiscountTemplate < ActiveRecord::Base
   before_validation :nils_to_defaults
   before_validation :dates_to_midnight
   
-  attr_accessible :value, :discount_type, :title,
+  attr_accessible :value, :discount_type, :title, :days_valid, :valid_type,
                   :minimum_order_amount, :usage_limit, :customer_criteria,
                   :order_placed_before, :order_placed_after, :shop_id, :shop
                   

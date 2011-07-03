@@ -1,6 +1,6 @@
 class AddDaysValidAndValidTypeToDiscountTemplates < ActiveRecord::Migration
   def self.up
-    add_column :discount_templates, :days_valid, :integer, :default => 0
+    add_column :discount_templates, :days_valid, :integer
     add_column :discount_templates, :valid_type, :string
   end
 

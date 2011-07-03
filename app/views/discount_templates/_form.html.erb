@@ -13,18 +13,17 @@
       </div >
     </div>
     <div class="grid8 inline first">
-      <%= f.input :days_valid, :label => "Valid for "%>
+      <% @dv = !(@discount_template.days_valid.nil?) %>
+      The coupon <a id="valid_time_link" style="<%= "display:none" if @dv %>">can be used any time</a>
+      <span id="valid_time" class="<%= "hide_me" unless @dv %>">
+        <%= f.input :days_valid, :label => "is valid until "%>days
       
-      <select id="day_modifier" name="day_modifier">
-        <option value="days">days</option>
-        <option value="weeks">weeks</option>
-        <option value="months">month</option>
-      </select>
-      
-      <%= f.input :valid_type, :as => :select, :collection => [["after they get the coupon","after_generated"], ["after the promotion finishes", "after_end_date"]], :required => true, :include_blank => false%>
+        <%= f.input :valid_type, :as => :select, :collection => [["after they get the coupon","after_generated"], ["after the promotion finishes", "after_end_date"]], :required => true, :include_blank => false, :label => ""%>
+      </span>
     </div>
     <%= f.input :order_placed_after, :as => :hidden %>
     <%= f.input :order_placed_before, :as => :hidden %>
   <% end %>
   <%= f.buttons %>
 <% end %>
+<%= javascript_include_tag "discount_template_form" %>

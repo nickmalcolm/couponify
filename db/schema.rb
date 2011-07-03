@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20110703084715) do
     t.string   "customer_criteria"
     t.integer  "shop_id"
     t.string   "title"
-    t.integer  "days_valid",                                          :default => 0
+    t.integer  "days_valid"
     t.string   "valid_type"
   end
 
