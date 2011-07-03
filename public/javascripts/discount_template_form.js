@@ -33,7 +33,7 @@ $(document).ready(
   function(){
     
     hider("#valid_time_link", "#valid_time");
-    
+    hider("#spend_link", "#spend");
     $(".hide_me").hide();
     
   }

@@ -2,7 +2,12 @@
   <%= f.inputs do %>
     <div class="grid8 inline first">
       <%= f.input :title %>
-      <%= f.input :customer_criteria, :as => :select, :collection => ["all","new","repeat"], :required => true, :include_blank => false %>
+      <%= f.input :customer_criteria, :as => :select, :collection => ["all","new","repeat"], :required => true, :include_blank => false, :label => "Give" %> customers who spend 
+      <% @mao = (@discount_template.minimum_order_amount > 0) unless @discount_template.minimum_order_amount.nil? %>
+      <a id="spend_link" style="<%= "display:none" if @mao %>">any amount</a>
+      <span id="spend" class="<%= "hide_me" unless @mao %>">
+        <%= f.input :minimum_order_amount, :label => "a minimum of #{current_shop.currency}"%>
+      </span>
     </div>
     <div class="grid8 inline first">
       <div class="grid4 first">
