@@ -8,6 +8,9 @@
 
 <div id="popup" class="prefix2 grid8" style="display:none;"></div>
 <% content_for(:jquery) do %>
+
+  $("#fancybox-outer").addClass("container12");
+  
   var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
@@ -40,7 +43,7 @@
 		select: function(start, end, allDay) {
 			$.fancybox({
         'autoDimensions': false,
-        'width': 600,
+        'width': 630,
         'height': 400,
         'transitionIn': 'none',
         'transitionOut': 'none',
@@ -60,7 +63,7 @@
       if (event.url) {
         $.fancybox({
             'autoDimensions': false,
-            'width': 600,
+            'width': 630,
             'height': 400,
             'transitionIn': 'none',
             'transitionOut': 'none',
