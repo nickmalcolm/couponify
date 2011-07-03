@@ -38,7 +38,12 @@ class DiscountTemplate < ActiveRecord::Base
   
   def discount_for_order(order)
     if order.matches? self
-      d = Discount.new(:customer => order.customer, :discount_template => self, :shop => self.shop)
+      d = Discount.new
+      d.customer = order.customer
+      d.discount_template = self
+      d.shop = self.shop
+      d.save!
+      
       discounts << d
       d
     end

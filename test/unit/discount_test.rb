@@ -14,22 +14,28 @@ class DiscountTest < ActiveSupport::TestCase
   end
   
   test "can create discount with auto code" do
-    d = Discount.create!(:customer => @customer, :shop => @shop, :discount_template => @dt)
+    d = Discount.new
+    d.customer = @customer
+    d.shop = @shop
+    d.discount_template = @dt
+    d.save!
     assert_equal 10, d.code.size
   end
   
   test "can't make a duplicate code per customer" do
-    d1 = Discount.create!(:customer => @customer, :shop => @shop, :discount_template => @dt)
+    d1 = Factory(:discount, :customer => @customer, :shop => @shop, :discount_template => @dt)
     code = d1.code
-    d2 = Discount.create!(:customer => @customer, :shop => @shop, :discount_template => @dt)
+    
+    d2 = Factory(:discount, :customer => @customer, :shop => @shop, :discount_template => @dt)
     d2.code = code
+    
     assert d2.invalid?
   end
   
   test "can have duplicate across customers" do
-    d1 = Discount.create!(:customer => @customer, :shop => @shop, :discount_template => @dt)
+    d1 = Factory(:discount, :customer => @customer, :shop => @shop, :discount_template => @dt)
     code = d1.code
-    d2 = Discount.create!(:customer => Factory(:customer), :shop => @shop, :discount_template => @dt)
+    d2 = Factory(:discount, :customer => Factory(:customer), :shop => @shop, :discount_template => @dt)
     d2.code = code
     assert d2.valid?
   end

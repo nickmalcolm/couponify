@@ -9,8 +9,6 @@ class Discount < ActiveRecord::Base
   validates_uniqueness_of :code, :scope => :customer_id
   validates :shop, :presence => true
   
-  attr_accessible :customer, :shop, :discount_template
-  
   scope :used, where("used = ?", true)
   scope :unused, where("used IS NOT true")
   
