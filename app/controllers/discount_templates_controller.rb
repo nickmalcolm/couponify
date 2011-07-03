@@ -3,13 +3,14 @@ class DiscountTemplatesController < ApplicationController
   around_filter :shopify_session
   
   def index
-    @discount_template = DiscountTemplate.new(:starts_at => DateTime.now, :order_placed_after => DateTime.now)
-    @discount_templates = DiscountTemplate.all
+    @discount_templates = current_shop.discount_templates.all
 
     respond_to do |format|
       format.html
       format.json do
-        render :json => DiscountTemplate.where("order_placed_before >= ? && order_placed_after <= ?", Time.at(params[:start].to_i), Time.at(params[:end].to_i))
+        render :json => current_shop.discount_templates.where(
+          "order_placed_before >= ? && order_placed_after <= ?", 
+          Time.at(params[:start].to_i), Time.at(params[:end].to_i))
       end
     end
   end
@@ -29,7 +30,12 @@ class DiscountTemplatesController < ApplicationController
   end
   
   def new
-    @discount_template = DiscountTemplate.new
+    if params[:discount_template]
+      @discount_template = DiscountTemplate.new(:order_placed_after => params[:discount_template][:start], :order_placed_before => params[:discount_template][:end])
+    else
+      @discount_template = DiscountTemplate.new
+    end
+    render :layout => nil
   end
   
   # POST /discount_templates
@@ -42,9 +48,11 @@ class DiscountTemplatesController < ApplicationController
     respond_to do |format|
       if @discount_template.save
         format.html { redirect_to(discount_templates_path, :notice => 'Discount template was successfully created.') }
+        format.js
       else
         @discount_templates = DiscountTemplate.all
         format.html { render :action => "index", :error => 'Oops! Please fix the missing or incorrect details' }
+        format.js
       end
     end
   end

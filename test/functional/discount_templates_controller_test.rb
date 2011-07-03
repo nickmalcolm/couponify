@@ -59,14 +59,52 @@ class LoggedInDiscountTemplatesControllerTest < ActionController::TestCase
   setup do
     @shop = Factory(:shop)
     login_as(@shop)
-    @discount_template = Factory(:discount_template, :shop => @shop)
+    @discount_template = Factory(:discount_template, :shop => @shop, 
+      :order_placed_after => DateTime.now.beginning_of_day, 
+      :order_placed_before => 2.days.from_now.beginning_of_day,
+      :title => "Cool Promotion")
   end
 
   test "should get index" do
     get :index
-    assert_select "#discount_template_#{@discount_template.id}"
     assert_response :success
-    assert_not_nil assigns(:discount_templates)
+    assert assigns(:discount_templates).include? @discount_template
+  end
+  
+  test "index shouldn't show other templates" do
+    d = Factory(:discount_template, :shop => Factory(:shop), 
+      :order_placed_after => DateTime.now.beginning_of_day, 
+      :order_placed_before => 2.days.from_now.beginning_of_day,
+      :title => "Cooler Promotion")
+    
+    get :index
+    assert !(assigns(:discount_templates).include? d)
+  end
+  
+  test "index json should contain events" do
+    get :index, :start => 100.days.ago.to_i, :end => 100.days.from_now.to_i, :format => 'json'
+    
+    json = (JSON.parse response.body)[0]
+    
+    assert_equal @discount_template.id, json["id"].to_i
+    assert_equal @discount_template.order_placed_after.to_i, DateTime.parse(json["start"]).to_i
+    assert_equal @discount_template.order_placed_before.to_i, DateTime.parse(json["end"]).to_i
+    assert_equal true, json["all_day"]
+    assert_equal "discount_templates/#{@discount_template.id}/", json["url"]
+    assert_equal "Cool Promotion", json["title"]
+  end
+  
+  
+  test "index json shouldn't show other shop's templates" do
+    d = Factory(:discount_template, :shop => Factory(:shop), 
+      :order_placed_after => DateTime.now.beginning_of_day, 
+      :order_placed_before => 2.days.from_now.beginning_of_day,
+      :title => "Cooler Promotion")
+    
+    get :index, :start => 100.days.ago.to_i, :end => 100.days.from_now.to_i, :format => 'json'
+    json_arr = (JSON.parse response.body)
+    
+    assert_equal 1, json_arr.size
   end
   
   test "index shouldn't show other shop's discounts" do
@@ -198,7 +236,7 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
     
     #Discount criteria
     assert_equal @now, dt.starts_at
-    assert_equal @now+7.days, dt.ends_at
+    assert_equal (@now+7.days).end_of_day, dt.ends_at
     assert_equal 25.00, dt.value.to_f
     assert_equal "percentage", dt.discount_type
     assert_equal 5, dt.usage_limit
