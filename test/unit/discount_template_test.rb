@@ -133,3 +133,23 @@ class DiscountTemplateTest < ActiveSupport::TestCase
   end
   
 end
+class DiscountGenerationTest< ActiveSupport::TestCase
+
+  def setup
+   @shop = Factory(:shop)
+   @order = Factory(:order, :customer => Factory(:customer, :orders_count => 1, :total_spent => 5.00), :total_price => 5.00)
+  end
+  
+  test "can generate discount for order" do
+    discount_template = Factory(:discount_template, :days_valid => 12, 
+      :valid_type => "after_generated", :minimum_order_amount => 0.00, 
+      :customer_criteria => "all", :shop => @shop)
+      
+    discount = discount_template.discount_for_order(@order)
+    assert !discount.nil?
+    assert_equal discount.customer, @order.customer
+    assert_equal discount.shop, @shop
+    assert discount_template.discounts.include? discount
+  end
+  
+end

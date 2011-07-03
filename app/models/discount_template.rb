@@ -36,6 +36,14 @@ class DiscountTemplate < ActiveRecord::Base
     return hash
   end
   
+  def discount_for_order(order)
+    if order.matches? self
+      d = Discount.new(:customer => order.customer, :discount_template => self, :shop => self.shop)
+      discounts << d
+      d
+    end
+  end
+  
   private
     def percentage_lte_100
       self.errors.add(:value, " is over 100%") if (discount_type.eql? "percentage") && (value > 100)

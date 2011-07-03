@@ -34,6 +34,7 @@ Factory.define :order do |o|
   o.subtotal_price 7.00
   o.buyer_accepts_marketing true
   o.association :shop, :factory => :shop
+  o.association :customer
 end
 
 Factory.define :shop do |s|
