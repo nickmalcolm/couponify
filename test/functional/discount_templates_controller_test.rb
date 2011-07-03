@@ -169,8 +169,6 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
                 :customer_criteria =>"repeat", 
                 :order_placed_after => @now.strftime(@sft), 
                 :order_placed_before =>"",
-                :starts_at => @now.strftime(@sft), 
-                :ends_at =>"",
                 :discount_type =>"fixed_amount", 
                 :minimum_order_amount =>"", 
                 :value =>""}
@@ -206,8 +204,6 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
     assert_nil dt.order_placed_before
     
     #Discount criteria
-    assert_equal @now, dt.starts_at
-    assert_nil dt.ends_at
     assert_equal 2.00, dt.value.to_f
     assert_equal "fixed_amount", dt.discount_type
     assert_equal 1, dt.usage_limit
@@ -218,7 +214,6 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
     params[:value] = 25
     params[:discount_type] = "percentage"
     params[:customer_criteria] = "new"
-    params[:ends_at] = (@now+7.days).strftime(@sft)
     params[:usage_limit] = 5
     params[:minimum_order_amount] = 5.76
     
@@ -235,8 +230,6 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
     assert_nil dt.order_placed_before
     
     #Discount criteria
-    assert_equal @now, dt.starts_at
-    assert_equal (@now+7.days).end_of_day, dt.ends_at
     assert_equal 25.00, dt.value.to_f
     assert_equal "percentage", dt.discount_type
     assert_equal 5, dt.usage_limit
@@ -245,16 +238,6 @@ class VariousDiscountTemplatesControllerTest < ActionController::TestCase
   test "can't have coupon last less than one day" do
     params = @defaults
     params[:ends_at] = @now
-    
-    assert_difference "DiscountTemplate.count", 0 do
-      post :create, :discount_template => params
-    end
-  end
-  
-  test "can't have coupon finish before starts" do
-    params = @defaults
-    params[:ends_at] = @now+2.days
-    params[:starts_at] = @now+3.days
     
     assert_difference "DiscountTemplate.count", 0 do
       post :create, :discount_template => params

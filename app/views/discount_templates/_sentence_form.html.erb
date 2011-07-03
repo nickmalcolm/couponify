@@ -11,12 +11,7 @@
 <% end %>
 
 <%= form_for @discount_template do |f| %>
-  Between <a id="starts_at">now</a>
-  <%= f.text_field :starts_at, :class=>"hide_me"%>
-
-  and <a id="ends_at">forever</a>,
-  <%= f.text_field :ends_at, :class=>"hide_me"%>
-   send <a id="all">repeat customers</a>
+  ABC
   <span id="define_customers" class="hide_me">
     <select id="discount_template_customer_criteria" name="discount_template[customer_criteria]">
       <option value="all">all</option>

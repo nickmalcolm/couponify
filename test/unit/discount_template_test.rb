@@ -85,10 +85,6 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     assert d.invalid?
   end
   
-  test "can't have coupon ends before starts" do
-    assert Factory.build(:discount_template, :starts_at => 1.day.from_now, :ends_at => DateTime.now).invalid?
-  end
-  
   test "can't have orders_before before orders_after" do
     assert Factory.build(:discount_template, :order_placed_before => DateTime.now, :order_placed_after => 1.day.from_now).invalid?
   end
@@ -96,9 +92,8 @@ class DiscountTemplateTest < ActiveSupport::TestCase
   test "start dates should be midnight" do
     date = DateTime.parse("12 July 2011 16:47")
     midnight = date.beginning_of_day
-    d = Factory(:discount_template, :order_placed_after => date, :starts_at => date)
+    d = Factory(:discount_template, :order_placed_after => date)
     assert_equal midnight, d.order_placed_after
-    assert_equal midnight, d.starts_at
   end
   
   test "valid for 2 weeks after discount is generated" do

@@ -10,8 +10,7 @@ module DiscountTemplatesHelper
     end
     
     d += " a <strong>#{value_to_s(dt)}</strong> discount code. "
-    d += "This code can be used between <strong>" + (dt.starts_at.nil? ? "now " : dt.starts_at.strftime("%d %b %y"))
-    d += "</strong> and <strong>" + (dt.ends_at.nil? ? "forever " : dt.ends_at.strftime("%d %b %y")) + "</strong>"
+    d += "This code can be used anytime"
     d += " on <strong> "
     d += dt.usage_limit.nil? ? " one order" : "at most #{pluralize(dt.usage_limit, "order")}"
     d += "</strong>."

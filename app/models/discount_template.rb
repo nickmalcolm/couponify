@@ -21,7 +21,7 @@ class DiscountTemplate < ActiveRecord::Base
   before_validation :nils_to_defaults
   before_validation :dates_to_midnight
   
-  attr_accessible :value, :discount_type, :starts_at, :ends_at, :title,
+  attr_accessible :value, :discount_type, :title,
                   :minimum_order_amount, :usage_limit, :customer_criteria,
                   :order_placed_before, :order_placed_after, :shop_id, :shop
                   
@@ -42,22 +42,17 @@ class DiscountTemplate < ActiveRecord::Base
     end
     
     def nils_to_defaults
-      self.starts_at ||= DateTime.now.utc
       self.order_placed_after ||= DateTime.now.utc
       self.minimum_order_amount ||= 0.00
       true
     end
     
     def ends_after_starts
-      self.errors.add(:ends_at, "is before the start date") if (!ends_at.nil? && (ends_at < starts_at))
       self.errors.add(:order_placed_before, "is before the start date") if (!order_placed_before.nil? && (order_placed_before < order_placed_after))
     end
     
     def dates_to_midnight
-      self.starts_at  = self.starts_at.utc.beginning_of_day
       self.order_placed_after  = self.order_placed_after.utc.beginning_of_day
-      
-      self.ends_at  = self.ends_at.utc.end_of_day unless self.ends_at.nil?
       self.order_placed_before = self.order_placed_before.utc.end_of_day unless self.order_placed_before.nil?
     end
 end
