@@ -155,4 +155,14 @@ class DiscountGenerationTest< ActiveSupport::TestCase
     assert discount_template.discounts.include? discount
   end
   
+  test "can generate discount with expires after promotion finish" do
+    discount_template = Factory(:discount_template, :days_valid => 12, 
+      :valid_type => "after_end_date", :minimum_order_amount => 0.00, 
+      :customer_criteria => "all", :shop => @shop, :order_placed_before => 5.days.from_now)
+      
+    discount = discount_template.discount_for_order(@order)
+    
+    assert_equal 17.days.from_now.utc.end_of_day, discount.expires_at
+  end
+  
 end

@@ -42,7 +42,13 @@ class DiscountTemplate < ActiveRecord::Base
       d.customer = order.customer
       d.discount_template = self
       d.shop = self.shop
-      d.expires_at = days_valid.days.from_now.end_of_day
+      
+      if valid_type.eql? "after_end_date"
+        d.expires_at = (order_placed_before + days_valid.days).end_of_day
+      else
+        d.expires_at = days_valid.days.from_now.end_of_day
+      end
+      
       d.save!
       
       discounts << d
