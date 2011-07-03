@@ -147,8 +147,11 @@ class DiscountGenerationTest< ActiveSupport::TestCase
       
     discount = discount_template.discount_for_order(@order)
     assert !discount.nil?
-    assert_equal discount.customer, @order.customer
-    assert_equal discount.shop, @shop
+    assert_equal @order.customer, discount.customer
+    assert_equal @shop, discount.shop
+    
+    assert_equal 12.days.from_now.utc.end_of_day, discount.expires_at
+    
     assert discount_template.discounts.include? discount
   end
   
