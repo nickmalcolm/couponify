@@ -23,6 +23,10 @@ class DiscountTemplateTest < ActiveSupport::TestCase
     assert_equal 0.00, d.value
     assert_equal "percentage", d.discount_type
     assert_equal "repeat", d.customer_criteria
+    
+    #auto for nils
+    assert_equal DateTime.now.utc.beginning_of_day, d.order_placed_after
+    assert_equal DateTime.now.utc.end_of_day, d.order_placed_before
   end
   
   test "10% for first order, when > $10.50, one use" do
