@@ -3,6 +3,7 @@ class DiscountTemplatesController < ApplicationController
   around_filter :shopify_session
   
   def index
+    p current_shop
     @discount_templates = current_shop.discount_templates.all
 
     respond_to do |format|
@@ -10,7 +11,7 @@ class DiscountTemplatesController < ApplicationController
       format.json do
         render :json => current_shop.discount_templates.where(
           "order_placed_before >= ? && order_placed_after <= ?", 
-          Time.at(params[:start].to_i), Time.at(params[:end].to_i))
+          Time.at(params[:start].to_i).beginning_of_day, Time.at(params[:end].to_i).end_of_day)
       end
     end
   end
