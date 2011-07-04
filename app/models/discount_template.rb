@@ -27,7 +27,7 @@ class DiscountTemplate < ActiveRecord::Base
                   
   def as_json(options={})
     hash = Hash.new
-    hash[:title] = title
+    hash[:title] = (title.nil? ? "" : title)
     hash[:all_day] = true
     hash[:start] = order_placed_after
     hash[:end] = order_placed_before
