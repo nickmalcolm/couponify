@@ -3,8 +3,12 @@
     <div class="grid8 inline first">
       <%= f.input :title %>
       <p class="dates">
-        <%= "Between #{@discount_template.order_placed_after.strftime("%d %b %R")}
+        <% unless @discount_template.order_placed_after.nil? %>
+          <%= "Between #{@discount_template.order_placed_after.strftime("%d %b %R")}
         and #{@discount_template.order_placed_before.strftime("%d %b %R")}" %>
+        <% end %>
+        <%= f.input :order_placed_after, :as => :hidden %>
+        <%= f.input :order_placed_before, :as => :hidden %>
       </p>
       <%= f.input :customer_criteria, :as => :select, :collection => ["all","new","repeat"], :required => true, :include_blank => false, :label => "Give" %> customers who spend 
       <% @mao = (@discount_template.minimum_order_amount > 0) unless @discount_template.minimum_order_amount.nil? %>
@@ -30,8 +34,6 @@
         <%= f.input :valid_type, :as => :select, :collection => [["after they get the coupon","after_generated"], ["after the promotion finishes", "after_end_date"]], :required => true, :include_blank => false, :label => ""%>
       </span>
     </div>
-    <%= f.input :order_placed_after, :as => :hidden %>
-    <%= f.input :order_placed_before, :as => :hidden %>
   <% end %>
   <%= f.buttons %>
 <% end %>

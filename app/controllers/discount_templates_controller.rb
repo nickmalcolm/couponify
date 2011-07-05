@@ -3,7 +3,6 @@ class DiscountTemplatesController < ApplicationController
   around_filter :shopify_session
   
   def index
-    p current_shop
     @discount_templates = current_shop.discount_templates.all
 
     respond_to do |format|
