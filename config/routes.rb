@@ -3,6 +3,8 @@ Couponify::Application.routes.draw do
   resources :discount_templates
 
   resources :discounts, :only => [:index, :show]
+  
+  match 'statistics'         => "statistics#index"
 
   root :to                   => 'home#index'
 
