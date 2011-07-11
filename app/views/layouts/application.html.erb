@@ -2,8 +2,11 @@
 <html>
 <head>
   <title>Shopify Application</title>
-  <%= stylesheet_link_tag "reset", "cupertino/jquery-ui-1.8.13.custom.css", "960", "formtastic", "fancybox", "style" %>
-  <%= javascript_include_tag "application", "jquery-1.6.1.min.js", "rails", "jquery-ui-1.8.14.custom.min.js", "jquery.fancybox-1.3.4.pack" %>
+  <%= stylesheet_link_tag "reset", "cupertino/jquery-ui-1.8.13.custom.css", "960", "formtastic", "fancybox", "jquery.jqplot.css", "style" %>
+  
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/javascripts/jqplot/excanvas.js"></script><![endif]-->
+  <%= javascript_include_tag "application", "jquery-1.6.1.min.js", "rails", "jquery-ui-1.8.14.custom.min.js", "jquery.fancybox-1.3.4.pack", "jqplot/jquery.jqplot.min.js" %>
+  
   <%= csrf_meta_tag %>
   <%= content_for(:head) %>
 </head>
