@@ -22,8 +22,8 @@ s.save!
   dt.save!
 end 
 
-#Make at least 100 customers
-(rand(100)+100).times do |i|
+#Make at least 200 customers
+(rand(200)+200).times do |i|
   c = Customer.new(:shop => s)
   c.email                 = Faker::Internet.email
   c.shopify_id            = i
@@ -47,8 +47,7 @@ end
   
   c = o.customer
   c.orders_count              = c.orders_count.to_i + 1
-  c.total_spent               ||= 0.00
-  c.total_spent               = c.total_spent + price
+  c.total_spent               = c.total_spent.to_i + price
   c.save!
 end
 
@@ -80,3 +79,32 @@ DiscountTemplate.all.each do |dt|
     end
   end
 end
+
+#Use some of the discounts
+(Discount.all.sample rand(Discount.count)).each_with_index do |d, i|
+  
+  customer = d.customer
+  
+  #Fake a shopify order which uses the code
+  o = Order.new(:shop => s)
+  o.discount_code             = d.code
+  o.email                     = customer.email 
+  o.shopify_id                = i
+  price                       = (rand*100+1).round(2)
+  o.total_price               = price
+  o.total_line_items_price    = price
+  o.subtotal_price            = price
+  o.buyer_accepts_marketing   = true
+  o.created_at                = rand(DateTime.now.to_i - d.created_at.to_i).seconds.ago
+  o.save!
+  
+  #Update the customer
+  customer.orders_count       = customer.orders_count.to_i + 1
+  customer.total_spent        = customer.total_spent.to_i + price
+  customer.save!
+  
+  #Update the discount
+  d.used                      = true
+  d.save!
+end
+  
