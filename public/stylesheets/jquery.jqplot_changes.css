@@ -1,0 +1,12 @@
+.jqplot-data-label{
+  color: #fff;
+  text-shadow: 1px 1px 1px #444;
+  filter: dropshadow(color=#444, offx=1, offy=1);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.jqplot-pie-line-label { 
+  color: #666;
+	text-align: center;
+}

@@ -1,45 +1,38 @@
 <% content_for(:head) do %>
-  <%= javascript_include_tag "jqplot/plugins/jqplot.pieRenderer.min"  %>
+  <%= stylesheet_link_tag "jquery.jqplot_changes" %>
+  <%= javascript_include_tag "jqplot/plugins/jqplot.pieRenderer" %>
 <% end %>
 <h2>Statistics</h2>
-<table id="discounts">
-  <tbody>
-    <caption>Discounts Generated</caption>
-    <thead>
-      <td>
-      </td>
-      <th scope="col">
-        Discounts
-      </th>
-    </thead>
-    <tr>
-      <th scope="row">
-        Used
-      </th>
-      <td>
-        <%= @used.count+1 %>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">
-        Unused
-      </th>
-      <td>
-        <%= @unused.count %>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
-<div style="width:420px;height:300px" id="pie_dish" class=""></div>
+<div id="pie_dish" class="grid4 first"></div>
 
 <% content_for(:jquery) do %>
+
   jQuery.jqplot('pie_dish', 
-    [[['Used', <%= @used.count+10 %>], ['Unused', <%= @unused.count+10 %> ]]], 
+    [[['Unused', <%= @unused.count %> ], ['Used', <%= @used.count %>]]], 
     {
-      title: ' ', 
-      seriesDefaults: {shadow: false, renderer: jQuery.jqplot.PieRenderer, rendererOptions: { sliceMargin: 4, showDataLabels: true } }, 
-      legend: { show:true }
+      grid: {
+        drawBorder: false, 
+        drawGridlines: false,
+        shadow:false,
+        background: "rgba(255,255,255, 0)"
+      },
+      seriesColors: ["#43C1EF", "#C8CF02"],
+      seriesDefaults: {
+        color: "#ffffff",
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: { 
+          diameter: 250,
+          padding: 0,
+          sliceMargin: 3, 
+          startAngle: -90,
+          showDataLabels: true,
+          shadowAngle: 45,
+          shadowOffset: 2,
+          shadowDepth: 2,
+          shadowAlpha: 0.3,
+          dataLabels: 'percent_label'
+        } }
     }
   );
 <% end %>
