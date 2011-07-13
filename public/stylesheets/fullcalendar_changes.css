@@ -1,0 +1,16 @@
+.fc{
+  font-family: inherit;
+}
+
+.fc-button{
+  font-family: Arial, sans-serif;
+}
+
+.fc-event-skin {
+	border-color: #43C1EF; 
+	background-color: #43C1EF;
+}
+
+.fc-event-title{
+  font-size: 12px;
+}
