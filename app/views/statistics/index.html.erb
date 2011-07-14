@@ -1,13 +1,51 @@
 <% content_for(:head) do %>
   <%= stylesheet_link_tag "jquery.jqplot_changes" %>
-  <%= javascript_include_tag "jqplot/plugins/jqplot.pieRenderer" %>
+  <%= javascript_include_tag "jqplot/plugins/jqplot.pieRenderer", "jqplot/plugins/jqplot.categoryAxisRenderer.min", "jqplot/plugins/jqplot.canvasTextRenderer.min",
+  "jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js",
+  "jqplot/plugins/jqplot.canvasOverlay.min.js",
+  "jqplot/plugins/jqplot.canvasTextRenderer.min.js",
+  "jqplot/plugins/jqplot.categoryAxisRenderer.min.js",
+  "jqplot/plugins/jqplot.cursor.min.js",
+  "jqplot/plugins/jqplot.dateAxisRenderer.min.js",
+  "jqplot/plugins/jqplot.highlighter.min.js",
+  "jqplot/plugins/jqplot.pointLabels.min.js"
+   %>
 <% end %>
 <h2>Statistics</h2>
 
 <div id="pie_dish" class="grid4 first"></div>
 
+<div id="chart1" class="grid8 last"></div>
+
 <% content_for(:jquery) do %>
 
+  $.jqplot ('chart1', [[3,7,9,1,4,6,8,2,5]], {
+    title: 'Unique Visitors by Day',
+    cursor: { show: true },
+    highlighter: { show: true },
+    seriesDefaults: { pointLabels: { show: true }},
+    axesDefaults: {
+        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+        labelOptions: {
+            fontSize: '13pt'
+        }
+    },
+
+    axes: {
+        xaxis: {
+            label: 'Date',
+            renderer: $.jqplot.DateAxisRenderer,
+            min: '03/30/2011 00:00:00',
+            tickInterval: '3 days',
+            tickOptions: { formatString: '%b %#d' }
+        },
+        yaxis: {
+            label: 'Unique Visitors' 
+        }
+    }
+  });
+  
+  
   jQuery.jqplot('pie_dish', 
     [[['Unused', <%= @unused.count %> ], ['Used', <%= @used.count %>]]], 
     {
