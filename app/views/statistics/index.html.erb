@@ -18,32 +18,32 @@
 <div id="chart1" class="grid8 last"></div>
 
 <% content_for(:jquery) do %>
-
-  $.jqplot ('chart1', [[3,7,9,1,4,6,8,2,5]], {
-    title: 'Unique Visitors by Day',
-    cursor: { show: true },
-    highlighter: { show: true },
-    seriesDefaults: { pointLabels: { show: true }},
-    axesDefaults: {
-        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-        labelOptions: {
-            fontSize: '13pt'
-        }
-    },
-
-    axes: {
-        xaxis: {
-            label: 'Date',
-            renderer: $.jqplot.DateAxisRenderer,
-            min: '03/30/2011 00:00:00',
-            tickInterval: '3 days',
-            tickOptions: { formatString: '%b %#d' }
-        },
-        yaxis: {
-            label: 'Unique Visitors' 
-        }
-    }
-  });
+  
+  var line1=  <%= @sales_value.inspect.html_safe %>;
+  var line2=  <%= @sales_count.inspect.html_safe %>;
+  var plot1 = $.jqplot('chart1', [line1], {
+       title:'Sales from Discounts',
+       axes:{
+         xaxis:{
+           renderer:$.jqplot.DateAxisRenderer,
+           tickOptions:{
+             formatString:'%b&nbsp;%#d'
+           } 
+         },
+         yaxis:{
+           tickOptions:{
+             formatString:'$%.2f'
+             }
+         }
+       },
+       highlighter: {
+         show: true,
+         sizeAdjust: 7.5
+       },
+       cursor: {
+         show: false
+       }
+   });
   
   
   jQuery.jqplot('pie_dish', 
