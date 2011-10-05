@@ -11,7 +11,6 @@ gem 'shopify_api', :git=>"git://github.com/Shopify/shopify_api.git"
 gem 'shopify_app'
 
 gem 'resque'
-gem 'system_timer'
 
 gem 'formtastic'
 
